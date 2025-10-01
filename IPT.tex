@@ -22,13 +22,14 @@
 \tableofcontents
 \newpage
 
-\section{Лекция 1}
+\section{Лекция 2}
 \begin{definition}
     Множество $\Omega$ называется множеством элементарных исходов. Множество $A\in 2^{\Omega}$ назывется событием.
 \end{definition}
 \begin{definition}
     Множество $\mathcal{A}\in 2^{\Omega}$ такое, что $\mathcal{A}\ne \emptyset$ называется алгеброй, если
     \begin{enumerate}
+        \item $\Omega \in \mathcal{F}$
         \item $A\in \mathcal{A} \Rightarrow \bar{A}=\Omega\setminus A\in \mathcal{A}$
         \item $A,B\in \mathcal{A} \Rightarrow A\cup B\in \mathcal{A}$
     \end{enumerate}
@@ -46,6 +47,7 @@
 \begin{definition}
     Множество $\mathcal{F}\in 2^{\Omega}$ такое, что $\mathcal{F}\ne \emptyset$ называется $\sigma$-алгеброй, если
     \begin{enumerate}
+        \item $\Omega \in \mathcal{F}$
         \item $A\in \mathcal{F} \Rightarrow \bar{A}\in \mathcal{F}$
         \item $\forall i\in \N: A_i\in \mathcal{F} \Rightarrow \bigcup\limits_{n=1}^{\infty}A_i\in \mathcal{F}$
     \end{enumerate} 
@@ -83,8 +85,57 @@
 \begin{definition}
     Мера $P$ на пространтсве $(\Omega, \mathcal{F})$ такая, что $P(\Omega)=1$ называется вероятностью.
 \end{definition}
+\subsection{Дискретные вероятностные пространства}
 \begin{definition}
-    Вероятность называется дисктерной, если $\Omega$ не более чем счетно. В этом случае $\mathcal{F}=2^{\Omega}$.
+    Пусть $\Omega=\{\omega_n\}_{n\in J}$ не более чем счетно, $\mathcal{F}=2^{\Omega}$, причем
+    \[P_n=P(\{\omega_n\})\geq 0,\ \sum_{n\in J} P_n =1\]
+    Пусть $A\subset \Omega$, определим вероятность так:
+    \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}P_k\]
+    такое вероятностное пространство называется дискретным.
 \end{definition}
-
+\begin{exercise}
+    Доказать, что определенное выше $P$ является вероятностью.
+\end{exercise}
+%ТУТ ВСТАВКА КАКАЯ-ТО
+\begin{definition} (Классическое определение вероятности)\\
+    Пусть $|\Omega|=N<\infty$ и положим $P_k=P(\{\omega_k\})=\frac{1}{N}$. Тогда
+    \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}P_k=\frac{|A|}{N}=\frac{|A|}{|\Omega|}\]
+\end{definition}
+%Тут были примеры
+\begin{definition}
+    Система $M$ подмножеств множества $S$ называется $\pi$-системой, если $A,B\in M \Rightarrow A\cap B\in M$
+\end{definition}
+\begin{definition}
+    Сисмтема $M$ подмножеств множества $S$ называется $\lambda$-системой, если
+    \begin{enumerate}
+        \item $S\in M$
+        \item $A,B\in M \Rightarrow B\setminus A\in M$
+        \item $A_1, A_2, \dots \in M$ и $A_n \nearrow A$, то $A\in M$.\\
+        ($A_n \nearrow A \Leftrightarrow A_n\subset A_{n+1},\ \forall n\in \N$ и $A=\bigcup\limits_{n=1}^{\infty}A_n$)
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Система $\mathcal{F}$ подмножеств $S$ является $\sigma$-алгеброй $\Leftrightarrow \mathcal{F}$ одновременно $\pi$-система и $\lambda$-система.
+\end{theorem}
+\begin{proof}\tab
+    \begin{itemize}
+        \item[($\Rightarrow$):] По следствию из определения алгебры: $A,B\in \mathcal{F} \Rightarrow A\cap B\in \mathcal{F}$, значит, $\mathcal{F}$ является $\pi$-системой. Теперь проверим условия $\lambda$-системы:
+        \begin{enumerate}
+            \item $S\in \mathcal{F}$ выполнено по проеделению алгебры.
+            \item $A,B\in \mathcal{F},\ A\subset B$, причем $B\setminus A=B\cap \bar{A} \Rightarrow B\setminus A\in \mathcal{F}$.
+            \item $A_1, A_2, \dots\in \mathcal{F},\ A=\bigcup\limits_{n=1}^{\infty}A_n \Rightarrow$ по свойству $\sigma$-алгебры $A\in \mathcal{F}$.
+        \end{enumerate}
+        \item[($\Leftarrow$):] Проверим определению $\sigma$-алгебры:
+        \begin{enumerate}
+            \item $S\in \mathcal{F}$ выполнено по первому свойству $\lambda$-системы.
+            \item $S\in \mathcal{F},\ A\subset S \Rightarrow S\setminus A\in \mathcal{F}$ выполнено по второму свойству $\lambda$-системы.
+            \item Пусть $B_1, B_2,\dots \in \mathcal{F},\ A_m:=\bigcup\limits_{n=1}^m B_n$ при этом
+            \[A_m=\bigcup\limits_{n=1}^m B_n=\overline{\left(\bigcap\limits_{n=1}^m \overline{B}_n\right)}\in \mathcal{F} \Rightarrow A_m\nearrow \bigcup\limits_{n=1}^{\infty} B_n \Rightarrow \bigcup\limits_{n=1}^{\infty} B_n\in \mathcal{F}\]
+        \end{enumerate}
+    \end{itemize}
+\end{proof}
+\begin{theorem}
+    Пусть M - $\pi$-система, $D$ - $\lambda$-система и $M\subset D$. Тогда 
+    \[\sigma\{M\}=\lambda\{M\}\subset D\]
+\end{theorem}
 \end{document}
