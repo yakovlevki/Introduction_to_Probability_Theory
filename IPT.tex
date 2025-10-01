@@ -1,0 +1,90 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{preamble}
+
+\title{\textbf{Введение в теорию вероятностей}}
+\author{Лектор: проф. Булинский Александр Вадимович}
+
+\begin{document}
+    
+\fontsize{14pt}{20pt}\selectfont
+\maketitle
+\vspace{0.3cm}
+%\begin{center}
+%    \includegraphics[width=0.75\linewidth]{Images/mehmat.png}
+%\end{center}
+\vspace{1.5cm}
+%\begin{center}
+    %Конспект: Кирилл Яковлев, 208 группа\\
+    % Контакты: \href{https://t.me/fourkenz}{Telegram}, \href{https://github.com/yakovlevki}{GitHub}\\
+%\end{center}
+    
+\newpage
+\tableofcontents
+\newpage
+
+\section{Лекция 1}
+\begin{definition}
+    Множество $\Omega$ называется множеством элементарных исходов. Множество $A\in 2^{\Omega}$ назывется событием.
+\end{definition}
+\begin{definition}
+    Множество $\mathcal{A}\in 2^{\Omega}$ такое, что $\mathcal{A}\ne \emptyset$ называется алгеброй, если
+    \begin{enumerate}
+        \item $A\in \mathcal{A} \Rightarrow \bar{A}=\Omega\setminus A\in \mathcal{A}$
+        \item $A,B\in \mathcal{A} \Rightarrow A\cup B\in \mathcal{A}$
+    \end{enumerate}
+\end{definition}
+\begin{statement} (Следствия из определения алгебры)
+    \begin{enumerate}
+        \item $\Omega\in \mathcal{A}$, так как для непустого $A\in \mathcal{A}: \bar{A}\in \mathcal{A} \Rightarrow A\cup\bar{A}=\Omega\in \mathcal{A}$
+        \item $\emptyset\in \mathcal{A}$, так как $\Omega\in \mathcal{A} \Rightarrow \bar{\Omega}=\emptyset\in \mathcal{A}$
+        \item $A_1,\dots,A_n \in \mathcal{A} \Rightarrow \bigcup\limits_{i=1}^n A_i\in \mathcal{A}$
+        \item $A\cap B\in \mathcal{A}$, если $A,B\in \mathcal{A}$, так как $A\cap B=\overline{\overline{A}\cup\overline{B}}$
+        \item $A_1,\dots,A_n \in \mathcal{A} \Rightarrow \bigcap\limits_{i=1}^n A_i\in \mathcal{A}$
+        \item $A\setminus B\in \mathcal{A}$, так как $A\setminus B=A\cap \bar{B}$
+    \end{enumerate}
+\end{statement}
+\begin{definition}
+    Множество $\mathcal{F}\in 2^{\Omega}$ такое, что $\mathcal{F}\ne \emptyset$ называется $\sigma$-алгеброй, если
+    \begin{enumerate}
+        \item $A\in \mathcal{F} \Rightarrow \bar{A}\in \mathcal{F}$
+        \item $\forall i\in \N: A_i\in \mathcal{F} \Rightarrow \bigcup\limits_{n=1}^{\infty}A_i\in \mathcal{F}$
+    \end{enumerate} 
+\end{definition}
+\begin{comm}
+    $\mathcal{F}$ - $\sigma$-алгебра $\Rightarrow \mathcal{F}$ - алгебра.
+\end{comm}
+\begin{comm}
+    Наименьшая по включению $\sigma$-алгебра, содержащая $M$, обозначается $\sigma\{M\}=\bigcap\limits_{\alpha}g_{\alpha}$, где $g_{\alpha}$ - $\sigma$-алгебра, содержащая все элементы $M$.
+\end{comm}
+\begin{definition}
+    Мерой на системе множеств $U$ называется функция\\ 
+    $\mu: U\to [0,+\infty]$ такая, что
+    \begin{enumerate}
+        \item $\forall n: A_n\in U$
+        \item \[\bigcup\limits_{n=1}^{\infty}A_n\in U\]
+        \item $\forall i\ne j: A_i\cap A_j=\emptyset$
+        \item Выполнено свойство счетной аддитивности (такая мера называется счетно-аддитивной):
+        \[\mu\left(\ \bigcup\limits_{n=1}^{\infty}A_n\ \right)=\sum_{n=1}^{\infty}\mu(A_n)\]
+    \end{enumerate}
+\end{definition}
+\begin{comm}
+    Если $U$ - $\sigma$-алгебра, то условие
+    \[\bigcup\limits_{n=1}^{\infty}A_n\in U\]
+    можно упустить.
+\end{comm}
+\begin{example} (Мера Дирака)\\
+    Пусть $B\subset S$
+    \[\delta_x(B)=\begin{cases}
+        1,\ x\in B,\\
+        0,\ x\not\in B
+    \end{cases}\]
+    Упражнение: доказать, что $\delta_x(.)$ является мерой на $2^S$
+\end{example}
+\begin{definition}
+    Мера $P$ на пространтсве $(\Omega, \mathcal{F})$ такая, что $P(\Omega)=1$ называется вероятностью.
+\end{definition}
+\begin{definition}
+    Вероятность называется дисктерной, если $\Omega$ не более чем счетно. В этом случае $\mathcal{F}=2^{\Omega}$.
+\end{definition}
+
+\end{document}
