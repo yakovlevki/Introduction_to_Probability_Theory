@@ -22,7 +22,8 @@
 \tableofcontents
 \newpage
 
-\section{Лекция 2}
+\section{Лекция 1}
+\subsection{Алгебра и сигма-алгебра}
 \begin{definition}
     Множество $\Omega$ называется множеством элементарных исходов. Множество $A\in 2^{\Omega}$ назывется событием.
 \end{definition}
@@ -58,6 +59,7 @@
 \begin{comm}
     Наименьшая по включению $\sigma$-алгебра, содержащая $M$, обозначается $\sigma\{M\}=\bigcap\limits_{\alpha}g_{\alpha}$, где $g_{\alpha}$ - $\sigma$-алгебра, содержащая все элементы $M$.
 \end{comm}
+\subsection{Вероятностная мера}
 \begin{definition}
     Мерой на системе множеств $U$ называется функция\\ 
     $\mu: U\to [0,+\infty]$ такая, что
@@ -102,6 +104,7 @@
     \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}P_k=\frac{|A|}{N}=\frac{|A|}{|\Omega|}\]
 \end{definition}
 %Тут были примеры
+\subsection{Пи-системы и лямбда-системы}
 \begin{definition}
     Система $M$ подмножеств множества $S$ называется $\pi$-системой, если $A,B\in M \Rightarrow A\cap B\in M$
 \end{definition}
@@ -134,8 +137,146 @@
         \end{enumerate}
     \end{itemize}
 \end{proof}
-\begin{theorem}
-    Пусть M - $\pi$-система, $D$ - $\lambda$-система и $M\subset D$. Тогда 
+\newpage
+\begin{theorem}\label{th1}
+    Пусть M - $\pi$-система, $D$ - $\lambda$-система и $M\subset D$. Тогда
     \[\sigma\{M\}=\lambda\{M\}\subset D\]
 \end{theorem}
+\section{Лекция 2}
+\subsection{Простейшие свойства конечно-аддитивной вероятностной меры на алгебре}
+\begin{theorem}
+    Пусть $P$ - конечно-аддитивная вероятностная мера на алгебре $\mathcal{A},\\ P(\Omega)=1,\ P(A\cup B)=P(A)+P(B),\ A\cap B=\emptyset$. Пусть $A,B\in \mathcal{A}$, тогда
+    \begin{enumerate}
+        \item $A\subset B \Rightarrow P(B\setminus A)=P(B)-P(A)$
+        \item $P(A\cup B)=P(A)+P(B)-P(A\cap B)$
+        \item Субаддитивность:
+        \[P\left(\bigcup\limits_{k=1}^n A_k\right) \leq \sum\limits_{k=1}^{n}P(A_k)\]
+        \item Если $P$ - вероятностная мера на $\sigma$-алгебре $\mathcal{F}$, то 
+        \[P\left(\bigcup\limits_{k=1}^{\infty}A_k\right)\leq \sum\limits_{k=1}^{\infty}P(A_k)\]
+    \end{enumerate}
+\end{theorem}
+\begin{proof}\tab
+    \begin{enumerate}
+        \item $B=A\cup(B\setminus A)$ и $A\cap (B\setminus A)=\emptyset \Rightarrow P(B)=P(A)+P(B\setminus A)$
+        \item $A\cup B=A\cup (B\setminus A)$ и $A\cap (B\setminus A)=\emptyset \Rightarrow P(A\cup B)=P(A)+P(B\setminus A)$,\\
+        $P(B\setminus A)=P(B)-P(A\cap B) \Rightarrow P(A\cup B)=P(A)+P(B)-P(A\cap B)$
+        \item По индукции. База $n=2$:\\
+        $P(A\cup B)=P(A)+P(B)-P(A\cup B) \leq P(A)+P(B)$, так как $P(A\cup B)\geq 0$
+        Пусть верно для $n-1$, тогда\\
+        \[P\left(\bigcup\limits_{k=1}^n A_k\right)=P\left(\bigcup\limits_{k=1}^{n-1} A_k \cup A_n\right) \leq \sum\limits_{k=1}^{n-1}P(A_k)+P(A_n)=\sum\limits_{k=1}^{n}P(A_k)\]
+        \item \textit{будет позже}
+    \end{enumerate}
+\end{proof}
+\subsection{Непрерывность сверху и снизу}
+\begin{definition}
+    Конечная неотрицательная функция $\mu$, заданная на алгебре $\mathcal{A}$, называется непрерывной в $\emptyset$, если $\forall A_n$:
+    \[A_n \downarrow \emptyset\ (A_{n+1}\subset A_n,\ \forall n\in \N: \bigcap\limits_{n=1}^{\infty}A_n=\emptyset) \Rightarrow \mu(A_n)\to 0\]
+\end{definition}
+\begin{definition}
+    Конечная нетрицательная функция $\mu$ на алгебре $\mathcal{A}$ называется 
+    \begin{enumerate}
+        \item непрерывной сверху на $A \in \mathcal{A}$, если $\forall A_n : A_n\downarrow A \Rightarrow \mu(A_n)\to \mu(A)$.\\
+        \[A_n \downarrow A \Leftrightarrow A_{n+1}\subset A_n,\ \forall n\in \N: \bigcap\limits_{n=1}^{\infty}A_n=A\]
+        \item непрерывной снизу на $A\in \mathcal{A}$, если $\forall A_n: A_n\uparrow A \Rightarrow \mu(A_n)\to \mu(A)$.
+        \[A_n \uparrow A \Leftrightarrow A_{n}\subset A_{n+1},\ \forall n\in \N: \bigcup\limits_{n=1}^{\infty}A_n=A\]
+    \end{enumerate}
+\end{definition}
+\begin{lemma}
+    Пусть $\mu$ - конечная нетрицательная конечно-аддитивная функция на алгебре $\mathcal{A}$. Тогда $\mu$ непрерывно сверху и снизу на любом $A\in \mathcal{A}$.
+\end{lemma}
+\begin{proof}
+    Докажем непрерывность сверху. Рассмотрим последовательность $A_n \downarrow A \Rightarrow A_n\setminus A \downarrow \emptyset \Rightarrow \mu(A_n\setminus A)=\mu(A_n)-\mu(A)\to 0$. Аналогично, рассмотрим $A_n\uparrow A \Rightarrow A\setminus A_n \downarrow \emptyset \Rightarrow \mu(A\setminus A_n)=\mu(A)-\mu(A_n)\to 0$.
+\end{proof}
+\begin{theorem}
+    Пусть $\mu$ - конечная нетрицательная функция но алгебре $\mathcal{A}$. Тогда $\mu$ является счетно-аддитивной на $\mathcal{A}$ тогда и только тогда, когда
+    \begin{enumerate}
+        \item $\mu$ является конечно-аддитивной.
+        \item $\mu$ непрерывна в $\emptyset$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}\tab
+    \begin{itemize}
+        \item[$(\Rightarrow)$:]
+        Пусть $\mu$ - счетно-аддитивная на $\mathcal{A}$. Рассмотрим $A_n \downarrow \emptyset,\ n\to \infty$ и введем $B_n=A_n\setminus A_{n+1},\ n\in \N$. Эти слои не пересекаются и $\bigcup\limits_{n=N}^{\infty}B_n=A_N$. Применим счетную аддитивность: 
+        \[\mu(A_N)=\sum\limits_{n=N}^{\infty}\mu(B_n)<\infty\]
+        Этот ряд сходится, значит последовательность (остаточных рядов)
+        \[S_N=\sum\limits_{n=N}^{\infty}\mu(B_n)\to 0\]
+        \item[$(\Leftarrow)$:]
+        %\[\mu\left(\bigcup\limits_{n=1}^{\infty}A_n\right)=\sum\limits_{n=1}^{\infty}\mu(A_n),\ A_i\cap A_j\ne \emptyset\]
+        Пусть $A_i\ne A_j,\ i\ne j$. Введем $C_n=\bigcup\limits_{k=n}^{\infty}A_k \Rightarrow C_n \downarrow \emptyset$. При этом \\
+        $A_1=C_1\cup\dots\cup C_{n-1}\cup C_n$, причем $A_1\in \mathcal{A}$ и $C_1,\dots,C_{n-1}\in \mathcal{A}$. Таким образом, $C_n\in \mathcal{A},\ \forall n\in \N$. 
+        \[\bigcup\limits_{k=1}^{\infty}A_k=A_1\cup\dots\cup A_{n-1}\cup C_n\]
+        Отсюда
+        \[\mu\left(\bigcup\limits_{k=1}^{\infty}A_k\right)=\mu(A_1)+ \dots +\mu(A_{n-1})+\mu(C_n)=\sum\limits_{k=1}^{n-1}\mu(A_k)+\mu(C_n)\]
+        при $n\to \infty,\ \mu(C_n)\to 0$, получим 
+        \[\mu\left(\bigcup\limits_{k=1}^{\infty}A_k\right)=\sum\limits_{k=1}^{\infty}\mu(A_k)\]
+    \end{itemize}
+\end{proof}
+\begin{theorem}
+    Пусть $P, Q$ - меры на $(\Omega, \mathcal{F})$ и $P=Q$ на алгебре $\mathcal{A}$. Тогда $P=Q$ на алгебре $\sigma\{\mathcal{A}\}$.
+\end{theorem}
+\begin{proof}
+    Воспользуемся \hyperref[th1]{теоремой из прошлой лекции}. Алгебра является $\pi$-системой, рассмотрим $D=\{B\in \mathcal{F}: P(B)=Q(B)\},\ \mathcal{A}\subset D$. Проверим, что $D$ является $\lambda$-системой:
+    \begin{enumerate}
+        \item $P(\Omega)=Q(\Omega)=1 \Rightarrow \Omega\in D$
+        \item $P(B\setminus A)=P(B)-P(A),\ Q(B\setminus A)=Q(B)-Q(A)$, причем\\
+        $P(A)=Q(A),\ P(B)=Q(B) \Rightarrow P(B\setminus A)=Q(B\setminus A) \Rightarrow B\setminus A\in D$.
+        $A_n\in D,\ A_n \uparrow A=\bigcup\limits_{n=1}^{\infty}A_n$. По свойству непрерывности $P(A_n)\to P(A),\\
+        Q(A_n)\to Q(A) \Rightarrow A\in D$.
+        Значит $\sigma\{\mathcal{A}\}\subset D$.
+    \end{enumerate}
+\end{proof}
+\subsection{Условные вероятности}
+\begin{definition}
+    Пусть $(\Omega, \mathcal{F}, P)$ - вероятностное пространство и $A,B\in \mathcal{F},\\
+    P(B)\ne 0$. Тогда вероятностью события $A$ при условии $B$ называется
+    \[P(A|B)=\frac{P(A\cap B)}{P(B)}\]
+\end{definition}
+\begin{definition} (Условная вероятность в классическом определении)\\
+    Пусть $(\Omega, \mathcal{F}, P)$ вероятностьное пространство, $|\Omega|=N<\infty,\ P(\{\omega_k\})=\frac{1}{N}$ и $P(B)=\frac{|B|}{N}$. Тогда
+    \[P(A|B)=\frac{|A\cap B|}{|B|}=\frac{\frac{1}{N}\cdot |A\cap B|}{\frac{1}{N}\cdot |B|}=\frac{P(A\cap B)}{P(B)}\]
+\end{definition}
+\begin{example}
+    \textit{пример про монетку}
+\end{example}
+\begin{theorem} (Формула полной вероятности)\\
+    Пусть $\Omega=B_1\cup B_2\cup...\ ,\ B_k\in \mathcal{F},\ P(B_k)>0$. Тогда определены $P(A|B_k)$, причем для $A\in \mathcal{F}$ верна формула
+    \[P(A)=\sum\limits_{k}P(A|B_k)P(B_k)\]
+\end{theorem}
+\begin{proof}
+    \[P(A)=P\left(\bigcup\limits_k (A\cap B_k)\right)=\sum\limits_{k}P(A\cap B_k),\ (A\cap B_k)\cap (A\cap B_m) = \emptyset,\ k\ne m\]
+    \[P(A|B_k)=\frac{P(A\cap B_k)}{P(B_k)} \Rightarrow P(A\cap B_k)=P(A|B_k)P(B_k)\]
+    отсюда
+    \[P(A)=\sum\limits_{k}P(A|B_k)P(B_k)\]
+\end{proof}
+\begin{theorem} (Формула Байеса)\\
+    Пусть $P(A)\ne 0$, тогда верна формула
+    \[P(B_k|A)=\frac{P(A|B_k)P(B_k)}{\sum\limits_{k}P(A|B_n)P(B_n)}\]
+\end{theorem}
+\begin{proof}
+    По определению условной вероятности и формуле полной вероятности, получим
+    \[P(B_k|A)=\frac{P(B_k\cap A)}{P(A)}=\frac{P(A|B_k)P(B_k)}{\sum\limits_{k}P(A|B_n)P(B_n)}\]
+\end{proof}
+\begin{definition}
+    Если $P(A|B)=P(A)$, то при $P(B)\ne 0$ выполнено
+    \[P(A\cap B)=P(A)P(B)\]
+    В этом случае события $A$ и $B$ называются независимыми.
+\end{definition}
+\begin{example}
+    \textit{пример с колодой карт}
+\end{example}
+\begin{definition}
+    Пусть $A_1,\dots,A_n$ - события. Они называются независимыми в совокупности, если $\forall i_1<i_2<\dots<i_n\leq n$:
+    \[P(A_{i_1}\cap A_{i_2}\cap \dots \cap A_{i_k})=P(A_{i_1}) P(A_{i_2}) \dots P(A_{i_k})\]
+\end{definition}
+\begin{definition}
+    Пусть $A_1,\dots,A_n$ - события. Они называются попарно независимыми, если $\forall i,j\in \{1,\dots,n\},\ i\ne j:$
+    \[P(A_i\cap A_j)=P(A_i)P(A_j)\]
+\end{definition}
+\begin{example}
+    \textit{пример того, что из определения 2 не следует определение 1}
+\end{example}
+\begin{definition}
+    Система $\{A_t,\ t\in T\}$ состоит из независимых событий, если для люього конечного $F\subset T,\ F=\{t_1,\dots,t_n\}$, события $A_{t_1},\dots, A_{t_n}$ независимы в совокупности.
+\end{definition}
 \end{document}
