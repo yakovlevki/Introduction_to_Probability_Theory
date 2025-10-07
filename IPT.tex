@@ -173,7 +173,7 @@
     \[A_n \downarrow \emptyset\ (A_{n+1}\subset A_n,\ \forall n\in \N: \bigcap\limits_{n=1}^{\infty}A_n=\emptyset) \Rightarrow \mu(A_n)\to 0\]
 \end{definition}
 \begin{definition}
-    Конечная нетрицательная функция $\mu$ на алгебре $\mathcal{A}$ называется 
+    Конечная неотрицательная функция $\mu$ на алгебре $\mathcal{A}$ называется 
     \begin{enumerate}
         \item непрерывной сверху на $A \in \mathcal{A}$, если $\forall A_n : A_n\downarrow A \Rightarrow \mu(A_n)\to \mu(A)$.\\
         \[A_n \downarrow A \Leftrightarrow A_{n+1}\subset A_n,\ \forall n\in \N: \bigcap\limits_{n=1}^{\infty}A_n=A\]
@@ -182,13 +182,13 @@
     \end{enumerate}
 \end{definition}
 \begin{lemma}
-    Пусть $\mu$ - конечная нетрицательная конечно-аддитивная функция на алгебре $\mathcal{A}$. Тогда $\mu$ непрерывно сверху и снизу на любом $A\in \mathcal{A}$.
+    Пусть $\mu$ - конечная неотрицательная конечно-аддитивная функция на алгебре $\mathcal{A}$. Тогда $\mu$ непрерывно сверху и снизу на любом $A\in \mathcal{A}$.
 \end{lemma}
 \begin{proof}
     Докажем непрерывность сверху. Рассмотрим последовательность $A_n \downarrow A \Rightarrow A_n\setminus A \downarrow \emptyset \Rightarrow \mu(A_n\setminus A)=\mu(A_n)-\mu(A)\to 0$. Аналогично, рассмотрим $A_n\uparrow A \Rightarrow A\setminus A_n \downarrow \emptyset \Rightarrow \mu(A\setminus A_n)=\mu(A)-\mu(A_n)\to 0$.
 \end{proof}
 \begin{theorem}
-    Пусть $\mu$ - конечная нетрицательная функция но алгебре $\mathcal{A}$. Тогда $\mu$ является счетно-аддитивной на $\mathcal{A}$ тогда и только тогда, когда
+    Пусть $\mu$ - конечная неотрицательная функция на алгебре $\mathcal{A}$. Тогда $\mu$ является счетно-аддитивной на $\mathcal{A}$ тогда и только тогда, когда
     \begin{enumerate}
         \item $\mu$ является конечно-аддитивной.
         \item $\mu$ непрерывна в $\emptyset$.
@@ -201,7 +201,7 @@
         \[\mu(A_N)=\sum\limits_{n=N}^{\infty}\mu(B_n)<\infty\]
         Этот ряд сходится, значит последовательность (остаточных рядов)
         \[S_N=\sum\limits_{n=N}^{\infty}\mu(B_n)\to 0\]
-        \item[$(\Leftarrow)$:]
+        \item[$(\Leftarrow)$:] (\textit{тут пока что лажа})
         %\[\mu\left(\bigcup\limits_{n=1}^{\infty}A_n\right)=\sum\limits_{n=1}^{\infty}\mu(A_n),\ A_i\cap A_j\ne \emptyset\]
         Пусть $A_i\ne A_j,\ i\ne j$. Введем $C_n=\bigcup\limits_{k=n}^{\infty}A_k \Rightarrow C_n \downarrow \emptyset$. При этом \\
         $A_1=C_1\cup\dots\cup C_{n-1}\cup C_n$, причем $A_1\in \mathcal{A}$ и $C_1,\dots,C_{n-1}\in \mathcal{A}$. Таким образом, $C_n\in \mathcal{A},\ \forall n\in \N$. 
@@ -237,7 +237,13 @@
     \[P(A|B)=\frac{|A\cap B|}{|B|}=\frac{\frac{1}{N}\cdot |A\cap B|}{\frac{1}{N}\cdot |B|}=\frac{P(A\cap B)}{P(B)}\]
 \end{definition}
 \begin{example}
-    \textit{пример про монетку}
+    Три раза бросается правильная монетка. Рассмотрим события:\\
+    $A$ - при первом броске выпал герб, $B$ - при трех бросаниях выпало два герба.
+    \[\Omega=\{(0,0,0),\ (1,0,0),\ (0,1,0),\ (0,0,1),\ (0,1,1),\ (1,0,1),\ (1,1,0),\ (1,1,1)\}\]
+    \[A=\{(1,0,0),\ (1,1,0),\ (1,0,1),\ (1,1,1)\}\] 
+    \[B=\{(1,1,0),\ (1,0,1),\ (0,1,1)\}\]
+    \[A\cap B=\{(1,1,0),\ (1,0,1)\}\]
+    \[P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{\frac{2}{8}}{\frac{3}{8}}=\frac{2}{3}\]
 \end{example}
 \begin{theorem} (Формула полной вероятности)\\
     Пусть $\Omega=B_1\cup B_2\cup...\ ,\ B_k\in \mathcal{F},\ P(B_k)>0$. Тогда определены $P(A|B_k)$, причем для $A\in \mathcal{F}$ верна формула
@@ -257,13 +263,18 @@
     По определению условной вероятности и формуле полной вероятности, получим
     \[P(B_k|A)=\frac{P(B_k\cap A)}{P(A)}=\frac{P(A|B_k)P(B_k)}{\sum\limits_{k}P(A|B_n)P(B_n)}\]
 \end{proof}
+\section{Лекция 3}
+\subsection{Независимые события}
 \begin{definition}
     Если $P(A|B)=P(A)$, то при $P(B)\ne 0$ выполнено
     \[P(A\cap B)=P(A)P(B)\]
     В этом случае события $A$ и $B$ называются независимыми.
 \end{definition}
 \begin{example}
-    \textit{пример с колодой карт}
+    В колоде 36 карт. Выбираем одну карту из колоды. Рассмотрим события: $A$ - вытянули карту масти треф, $B$ - вытянули туз.
+    \[P(A)=\frac{1}{4},\ P(B)=\frac{4}{36}=\frac{1}{9},\ P(A\cap B)=\frac{1}{36}\]
+    \[P(A)P(B)=\frac{1}{4}\cdot\frac{1}{9}=\frac{1}{36}=P(A\cap B)\]
+    значит события независимы.
 \end{example}
 \begin{definition}
     Пусть $A_1,\dots,A_n$ - события. Они называются независимыми в совокупности, если $\forall i_1<i_2<\dots<i_n\leq n$:
@@ -274,9 +285,72 @@
     \[P(A_i\cap A_j)=P(A_i)P(A_j)\]
 \end{definition}
 \begin{example}
-    \textit{пример того, что из определения 2 не следует определение 1}
+    Рассмотрим $(\Omega, \mathcal{F}, P)$ в рамках классического определения: 
+    \[\Omega=\{\omega_1,\omega_2,\omega_3,\omega_4\},\ A_1=\{\omega_1, \omega_2\},\ A_2=\{\omega_1,\omega_3\},\ A_3=\{\omega_1,\omega_4\},\ A_i\cap A_j=\{\omega_1\}\] 
+    Тогда 
+    \[P(A_i\cap A_j)=P(\{\omega_1\})=\frac{1}{4}\] 
+    но с другой стороны 
+    \[P(A_1\cap A_2\cap A_3)=\frac{1}{4} \ne \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2}\]
 \end{example}
 \begin{definition}
-    Система $\{A_t,\ t\in T\}$ состоит из независимых событий, если для люього конечного $F\subset T,\ F=\{t_1,\dots,t_n\}$, события $A_{t_1},\dots, A_{t_n}$ независимы в совокупности.
+    Система $\{A_t,\ t\in T\}$ состоит из независимых событий, если для любого конечного $F\subset T,\ F=\{t_1,\dots,t_n\}$, события $A_{t_1},\dots, A_{t_n}$ независимы в совокупности.
 \end{definition}
+\begin{lemma}\label{lem1}
+    Пусть $A_1,\dots,A_n$ - независимые события. Рассмотрим $B_1,\dots,B_n$ такие, что $B_i=A_i$ или $B_i=\overline{A_i}$. Тогда $B_1,\dots,B_n$ - независимые события. 
+\end{lemma}
+\begin{proof}
+    Достаточно рассмотреть случай $B_j=\overline{B_j},\ B_i=A_i,\\ \forall i\ne j$. Возьмем $I=\{i_1,\dots,i_k\},\ 1\leq i_1<\dots<i_k\leq n$ и проверим, что
+    \[P(B_{i_1}\cap \dots \cap B_{i_k})=P(B_{i_1})\dots P(B_{i_k}) \eqno{(*)}\]
+    Рассмотрим случаи:
+    \begin{enumerate}
+        \item $j\not\in I$. Тогда $B_i=A_i$ и ($*$) выполнено.
+        \item $j\in I \Rightarrow \exists\ m: j=i_m$. Тогда 
+        \begin{multline*}
+            P(B_{i_1}\cap \dots \cap B_{i_k})=P(A_{i_1}\cap \dots\cap \overline{A_{i_m}}\cap \dots \cap A_{i_k}) =\\
+            = P((A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})\setminus(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_m}\cap A_{i_{m+1}}\cap \dots\cap A_{i_k}))\overset{(1)}{=}\\
+            \overset{(1)}{=} P(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})-P(A_{i_1}\cap \dots \cap A_{i_k})=\\\
+            =(P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k}))-(P(A_{i_1})\dots P(A_{i_k}))\overset{(2)}{=}\\
+            \overset{(2)}{=} P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k})(1-P(A_{i_m}))=\\=P(B_{i_1})\dots P(B_{i_m})\dots P(B_{i_k})
+        \end{multline*}
+        (1): Пользуемся тем, что:
+        \begin{itemize}
+            \item $A\cap \overline{C}=A\setminus (A\cap C)$
+            \item $A\subset B \Rightarrow P(B\setminus A)=P(B)-P(A)$
+        \end{itemize}
+        (2): Выносим общий множитель за скобку. 
+    \end{enumerate}
+\end{proof}
+\begin{theorem}
+    Пусть $\phi(n)$ - функция Эйлера, $p_i$ - $i$-е простое число. Тогда
+    \[\phi(n)=n\cdot\prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)\]
+\end{theorem}
+\begin{proof}
+    Введем $\Omega=\{1,\dots n\},\ \mathcal{F}=2^{\Omega},\ P(\{i\})=\frac{1}{n},\ i=1,\dots,n$. Проведем следующий эксперимент: из чисел $1,\dots,n$ наугад выбирается число. Рассмотрим событие $A$ - выбрано число, взаимно простое с $n$. Тогда
+    \[P(A)=\frac{\phi(n)}{n}\]
+    Рассмотрим события $A_i$ - выбраное число делится на $p_i$. Отсюда
+    \[A_i=\{p_i,\ 2p_i,\ \dots,\ \frac{n}{p_i}\cdot p_i\} \Rightarrow P(A_i)=\frac{\frac{n}{p_i}}{n}=\frac{1}{p_i}\]
+    Для любых $1\leq i_1<\dots<i_k\leq n$:
+    \[A_{i_1}\cap \dots\cap A_{i_k}=\{p_{i_1}\dots p_{i_k},\ 2p_{i_1}\dots p_{i_k},\ \dots,\ \frac{n}{p_{i_1}\dots p_{i_k}}\cdot p_{i_1}\dots p_{i_k}\}\]
+    \[P(A_{i_1}\cap \dots\cap A_{i_k})=\frac{\frac{n}{p_{i_1}\dots p_{i_k}}}{n}=\frac{1}{p_{i_1}\dots p_{i_k}}=P(A_{i_1})\dots P(A_{i_k})\]
+    Значит $A_{i_1},\dots, A_{i_k}$ независимы $\Rightarrow$ по \hyperref[lem1]{лемме} $\overline{A_{i_1}},\dots, \overline{A_{i_k}}$ независимы. Тогда
+    \begin{multline*}
+        P(A)=P(\overline{A_{P_1}}\cap \overline{A_{p_2}}\cap \dots \cap \overline{A_{p_m}})=P(\overline{A_{p_1}})P(\overline{A_{p_2}})\dots P(\overline{A_{p_n}})=\\
+        =(1-P(A_{p_1}))(1-P(A_{p_2}))\dots (1-P(A_{p_m}))=\prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)
+    \end{multline*}
+    значит
+    \[\prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)=\frac{\phi(n)}{n}\ \Rightarrow\ \phi(n)=n\cdot \prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)\]
+\end{proof}
+\begin{definition}
+    Системы событий $\mathcal{G}_1,\dots,\mathcal{G}_n$ называются независимыми, если $\forall 1\leq i_1 < \dots <i_k\leq n$ и $\forall A_i\in \mathcal{G}_i: A_{i_1},\dots,A_{i_k}$ независимы. Если все $\mathcal{G}_k$ содержат $\Omega$ (например $\mathcal{G}_k$ - алгебры), то это определение равносильно следующему: 
+    \[P(A_1\cap \dots\cap A_n)=P(A_1)\dots P(A_n),\ \forall A_i\in \mathcal{G}_i\]
+\end{definition}
+\begin{theorem}
+    Пусть $\pi$-системы $M_1,\dots,M_n$ (подмножества $\Omega$ из $\mathcal{F}$) независимы. Тогда независимы $\sigma\{M_1\},\dots,\sigma\{M_n\}$.
+\end{theorem}
+\begin{proof}
+    Рассмотрим все события $B_1$ такие, что 
+    \[P(B_1\cap B_2\cap \dots \cap B_n)=P(B_1)\dots P(B_n)\eqno(*)\]
+    для $B_2\in M_2,\ \dots,\ B_n\in M_n$. Назовем такие $B_1$ системой $D_1$. Покажем, что $D_1$ является $\lambda$-системой: (\textit{будет позже})\\
+    Тогда, поскольку $M_1\subset D_1$, то $\sigma\{M_1\}\subset D_1$
+\end{proof}
 \end{document}
