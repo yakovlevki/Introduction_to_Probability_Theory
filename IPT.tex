@@ -295,7 +295,7 @@
 \begin{definition}
     Система $\{A_t,\ t\in T\}$ состоит из независимых событий, если для любого конечного $F\subset T,\ F=\{t_1,\dots,t_n\}$, события $A_{t_1},\dots, A_{t_n}$ независимы в совокупности.
 \end{definition}
-\begin{lemma}\label{lem1}
+\begin{lemma}\label{lm1}
     Пусть $A_1,\dots,A_n$ - независимые события. Рассмотрим $B_1,\dots,B_n$ такие, что $B_i=A_i$ или $B_i=\overline{A_i}$. Тогда $B_1,\dots,B_n$ - независимые события. 
 \end{lemma}
 \begin{proof}
@@ -306,18 +306,15 @@
         \item $j\not\in I$. Тогда $B_i=A_i$ и ($*$) выполнено.
         \item $j\in I \Rightarrow \exists\ m: j=i_m$. Тогда 
         \begin{multline*}
-            P(B_{i_1}\cap \dots \cap B_{i_k})=P(A_{i_1}\cap \dots\cap \overline{A_{i_m}}\cap \dots \cap A_{i_k}) =\\
-            = P((A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})\setminus(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_m}\cap A_{i_{m+1}}\cap \dots\cap A_{i_k}))\overset{(1)}{=}\\
-            \overset{(1)}{=} P(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})-P(A_{i_1}\cap \dots \cap A_{i_k})=\\\
-            =(P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k}))-(P(A_{i_1})\dots P(A_{i_k}))\overset{(2)}{=}\\
-            \overset{(2)}{=} P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k})(1-P(A_{i_m}))=\\=P(B_{i_1})\dots P(B_{i_m})\dots P(B_{i_k})
+            P(B_{i_1}\cap \dots \cap B_{i_k})=P(A_{i_1}\cap \dots\cap \overline{A_{i_m}}\cap \dots \cap A_{i_k}) \overset{(1)}{=}\\
+            \overset{(1)}{=} P((A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})\setminus(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_m}\cap A_{i_{m+1}}\cap \dots\cap A_{i_k}))\overset{(2)}{=}\\
+            \overset{(2)}{=} P(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})-P(A_{i_1}\cap \dots \cap A_{i_k})=\\\
+            =(P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k}))-(P(A_{i_1})\dots P(A_{i_k}))\overset{(3)}{=}\\
+            \overset{(3)}{=} P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k})(1-P(A_{i_m}))=\\=P(B_{i_1})\dots P(B_{i_m})\dots P(B_{i_k})
         \end{multline*}
-        (1): Пользуемся тем, что:
-        \begin{itemize}
-            \item $A\cap \overline{C}=A\setminus (A\cap C)$
-            \item $A\subset B \Rightarrow P(B\setminus A)=P(B)-P(A)$
-        \end{itemize}
-        (2): Выносим общий множитель за скобку. 
+        (1): $A\cap \overline{C}=A\setminus (A\cap C)$\\
+        (2): $A\subset B \Rightarrow P(B\setminus A)=P(B)-P(A)$\\
+        (3): Выносим общий множитель за скобку. 
     \end{enumerate}
 \end{proof}
 \begin{theorem}
@@ -332,7 +329,7 @@
     Для любых $1\leq i_1<\dots<i_k\leq n$:
     \[A_{i_1}\cap \dots\cap A_{i_k}=\{p_{i_1}\dots p_{i_k},\ 2p_{i_1}\dots p_{i_k},\ \dots,\ \frac{n}{p_{i_1}\dots p_{i_k}}\cdot p_{i_1}\dots p_{i_k}\}\]
     \[P(A_{i_1}\cap \dots\cap A_{i_k})=\frac{\frac{n}{p_{i_1}\dots p_{i_k}}}{n}=\frac{1}{p_{i_1}\dots p_{i_k}}=P(A_{i_1})\dots P(A_{i_k})\]
-    Значит $A_{i_1},\dots, A_{i_k}$ независимы $\Rightarrow$ по \hyperref[lem1]{лемме} $\overline{A_{i_1}},\dots, \overline{A_{i_k}}$ независимы. Тогда
+    Значит $A_{i_1},\dots, A_{i_k}$ независимы $\Rightarrow$ по \hyperref[lm1]{лемме} $\overline{A_{i_1}},\dots, \overline{A_{i_k}}$ независимы. Тогда
     \begin{multline*}
         P(A)=P(\overline{A_{P_1}}\cap \overline{A_{p_2}}\cap \dots \cap \overline{A_{p_m}})=P(\overline{A_{p_1}})P(\overline{A_{p_2}})\dots P(\overline{A_{p_n}})=\\
         =(1-P(A_{p_1}))(1-P(A_{p_2}))\dots (1-P(A_{p_m}))=\prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)
@@ -340,17 +337,112 @@
     значит
     \[\prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)=\frac{\phi(n)}{n}\ \Rightarrow\ \phi(n)=n\cdot \prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)\]
 \end{proof}
+\begin{definition} %дописать эквивалентность
+    Системы событий $\mathcal{G}_1,\dots,\mathcal{G}_n$ называются независимыми, если $\forall 1\leq i_1 < \dots <i_k\leq n$ и $\forall A_i\in \mathcal{G}_i: A_{i_1},\dots,A_{i_k}$ независимы.
+\end{definition}
 \begin{definition}
-    Системы событий $\mathcal{G}_1,\dots,\mathcal{G}_n$ называются независимыми, если $\forall 1\leq i_1 < \dots <i_k\leq n$ и $\forall A_i\in \mathcal{G}_i: A_{i_1},\dots,A_{i_k}$ независимы. Если все $\mathcal{G}_k$ содержат $\Omega$ (например $\mathcal{G}_k$ - алгебры), то это определение равносильно следующему: 
+    Пусть все $\mathcal{G}_k$ содержат $\Omega$ (например $\mathcal{G}_k$ - алгебры), то это определение равносильно следующему: 
     \[P(A_1\cap \dots\cap A_n)=P(A_1)\dots P(A_n),\ \forall A_i\in \mathcal{G}_i\]
 \end{definition}
+\begin{statement}
+    Если все $\mathcal{G}_k$ содержат $\Omega$, то эти определения эквивалентны.
+\end{statement}
+\begin{proof}\tab
+    \begin{enumerate}
+        \item Первое определние влечет второе, поскольку в качестве $i_1,\dots,i_k$ можно взять $1,\dots,n$.
+        \item Докажем, что второе определение влечет первое:
+        Рассмотрим произвольный набор событий $A_{i_1}, \dots, A_{i_k}$ и определим события $B_1,\dots,B_n$:
+        \[B_m=\begin{cases}
+            A_m,\ m\in \{i_1,\dots,i_k\},\\
+            \Omega,\ m\not\in \{i_1,\dots,i_k\}.
+        \end{cases}\]
+        Тогда
+        \[B_1\cap \dots\cap B_n=A_{i_1}\cap \dots\cap A_{i_k}\cap (\Omega \cap \dots \cap \Omega)=A_{i_1}\cap \dots\cap A_{i_k}\]
+        значит
+        \begin{multline*}
+            P(A_{i_1}\cap \dots\cap A_{i_k})=P(B_1\cap \dots\cap B_n)=\\
+            =P(A_{i_1})\dots P(A_{i_k})\cdot (1 \dots 1)=P(A_{i_1})\dots P(A_{i_k})
+        \end{multline*}
+    \end{enumerate}
+\end{proof}
 \begin{theorem}
     Пусть $\pi$-системы $M_1,\dots,M_n$ (подмножества $\Omega$ из $\mathcal{F}$) независимы. Тогда независимы $\sigma\{M_1\},\dots,\sigma\{M_n\}$.
 \end{theorem}
 \begin{proof}
-    Рассмотрим все события $B_1$ такие, что 
-    \[P(B_1\cap B_2\cap \dots \cap B_n)=P(B_1)\dots P(B_n)\eqno(*)\]
-    для $B_2\in M_2,\ \dots,\ B_n\in M_n$. Назовем такие $B_1$ системой $D_1$. Покажем, что $D_1$ является $\lambda$-системой: (\textit{будет позже})\\
-    Тогда, поскольку $M_1\subset D_1$, то $\sigma\{M_1\}\subset D_1$
+    Рассмотрим все события $B_1$ такие, что выполнено:
+    \[P(B_1\cap B_2\cap \dots \cap B_n)=P(B_1)P(B_2)\dots P(B_n)\eqno(*)\]
+    для проиизвольных $B_2\in M_2,\ \dots,\ B_n\in M_n$. Назовем такие $B_1$ системой $D_1$. Покажем, что $D_1$ является $\lambda$-системой:
+    \begin{enumerate}
+        \item ($\Omega \in D_1$)
+        \begin{multline*}
+            P(\Omega\cap B_2\cap \dots\cap B_n)=P(B_2\cap B_n)=\\
+            =P(B_2)\dots P(B_n)=P(\Omega)P(B_2)\dots P(B_n)
+        \end{multline*}
+        Значит $\Omega \in D_1$.
+        \item ($A_1,A_2\in D_1,\ A_1\subset A_2 \Rightarrow A_1\setminus A_2\in D_1$)\\
+        Пусть $B_i, B_j$ - события, для которых выполнено $(*)$ и $B_j\subset B_i$
+        \newline
+        \begin{multline*}
+            P((B_i\setminus B_j)\cap (B_2\cap \dots\cap B_n))\overset{(1)}{=}\\
+            \overset{(1)}{=}P((B_i\cap B_2\cap \dots\cap B_n)\setminus (B_j\cap B_2\cap \dots\cap B_n))=\tab[4cm]\\
+            =P(B_i\cap B_2\cap \dots\cap B_n)-P(B_j\cap B_2\cap \dots\cap B_n)=\tab[1cm]\\
+            \tab[3cm]=P(B_i)\dots P(B_n)-P(B_j)\dots P(B_n)=\tab[2.5cm]\\
+            \tab[3.5cm]=P(B_2)\dots P(B_n)(P(B_i)-P(B_j))=\\
+            =P(B_i\setminus B_j)P(B_2)\dots P(B_n)
+        \end{multline*}
+        (1): $(B\setminus A)\cap C=(B\cap C)\setminus (A\cap C)$
+        \item ($A_1,A_2\dots \in D,\ A_i\subset A_{i+1}$ и $A_i\uparrow A \Rightarrow A\in D_1$)\\
+        Пусть $B_{i} \uparrow B$. Тогда
+        \[(B_{i}\cap B_2\cap \dots\cap B_n) \uparrow (B\cap B_2\cap \dots\cap B_n)\]
+        Поскольку вероятностная мера непрерывна, то
+        \[P(B_i\cap B_2\cap \dots \cap B_n) \to P(B\cap B_2\cap \dots \cap B_n)\]
+        причем 
+        \[P(B_i)P(B_2)\dots P(B_n)\to P(B)P(B_2)\dots P(B_n)\]
+        значит
+        \[P(B\cap B_2\cap \dots \cap B_n)=P(B)P(B_2)\dots P(B_n)\]
+        а это означает, что $B\in D_1$.
+    \end{enumerate}
+    Значит $D_1$ - это $\lambda$-система. Тогда, поскольку $M_1\subset D_1$, то $\sigma\{M_1\}\subset D_1$.\\
+    Аналогичными рассуждениями, получим, что $\sigma\{M_2\}\subset D_2, \dots, \sigma\{M_n\}\subset D_n$. Поскольку $D_1,\dots, D_n$ независимы, то $\sigma\{M_1\}, \dots, \sigma\{M_n\}$ независимымы.
 \end{proof}
+\begin{lemma} (Лемма Бореля-Кантелли)
+    \begin{enumerate}
+        \item Если события $A_1, A_2, \dots$ таковы, что
+        \[\sum\limits_{n=1}^{\infty}P(A_n)<\infty\]
+        то вероятность события "произошло бесконенчное число $A_n$"\ равна 0.
+        \item Если $A_1, A_2, \dots$ независимые события, такие, что
+        \[\sum\limits_{n=1}^{\infty}P(A_n)=\infty\]
+        то вероятность события "произошло бесконенчное число $A_n$"\ равна 1.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Заметим, что событие "произошло бесконенчное число $A_n$"\ можно представить в виде
+    \[A=\bigcap\limits_{n=1}^{\infty}\left(\ \bigcup\limits_{k=n}^{\infty}A_k\right)\]
+    Тогда
+    \begin{enumerate}
+        \item При $n\to \infty$
+        \[P\left(\ \bigcap\limits_{n=1}^{\infty}\left(\ \bigcup\limits_{k=n}^{\infty}A_k\ \right)\right)\leq P\left(\ \bigcup\limits_{k=n}^{\infty}A_k\right)\leq \sum\limits_{k=n}^{\infty}P(A_k)\to 0\]
+        \item Это равносильно тому, что
+        \[P\left(\ \overline{\bigcap\limits_{n=1}^{\infty}\left(\ \bigcup\limits_{k=n}^{\infty}A_k\right)}\right)=0\]
+        \begin{multline*}
+            P\left(\ \overline{\bigcap\limits_{n=1}^{\infty}\left(\ \bigcup\limits_{k=n}^{\infty}A_k\right)}\right)=P\left(\ \bigcup\limits_{n=1}^{\infty}\left(\ \overline{\bigcup\limits_{k=n}^{\infty}A_k}\right)\right)=\\
+            =P\left(\ \bigcup\limits_{n=1}^{\infty}\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)\right)\leq \sum\limits_{n=1}^{\infty}P\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)
+        \end{multline*}
+        Покажем, что $\forall n\in \N$:
+        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)\]
+        Поскольку вероятностная мера непрерывна, то 
+        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)=\lim\limits_{N\to\infty}P\left(\ \bigcup\limits_{k=n}^{N}\overline{A_k}\right)\]
+        $A_1,\dots,A_n$ независимы $\Rightarrow \overline{A_1}, \dots, \overline{A_n}$ независимы по лемме. Поэтому
+        \begin{multline*}
+            P\left(\ \bigcup\limits_{k=n}^{N}\overline{A_k}\right)=\prod\limits_{k=n}^{N}P(\overline{A_k})=\prod\limits_{k=n}^{N}(1-P(A_k))\overset{(1)}{\leq}\\
+            \overset{(1)}{\leq} \prod\limits_{k=n}^{N} e^{-P(A_k)}=\text{exp}{\left(-\sum\limits_{k=n}^{N}P(A_k)\right)}
+        \end{multline*}
+        (1): Используем неравенство: $\forall x\in \R,\ 1-x\leq e^{-x}$ (Можно доказать, разложив экспоненту в степенной ряд).\\
+        При $N\to \infty$ получим
+        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)\leq\text{exp}{\left(-\sum\limits_{k=n}^{N}P(A_k)\right)}\to 0\]
+    \end{enumerate}
+\end{proof}
+\begin{lemma} (Лемма о групировке)\\
+    Пусть имеется семейтво $\mathcal{A}_t,\ t\in I$ независимых $\sigma$-алгебр. Возьмем $I_1,I_2,\dots\subset T: I_k\cap I_m=\emptyset,\ \forall k\ne m$ и для $I\subset T$ введем $\sigma\{I\}=\sigma\{\mathcal{A}_t,\ t\in I\}$. Тогда $\sigma\{I_1\}, \sigma\{I_2\}, \dots$ - независимые $\sigma$-алгербы.
+\end{lemma}
 \end{document}
