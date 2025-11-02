@@ -439,10 +439,469 @@
         \end{multline*}
         (1): Используем неравенство: $\forall x\in \R,\ 1-x\leq e^{-x}$ (Можно доказать, разложив экспоненту в степенной ряд).\\
         При $N\to \infty$ получим
-        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)\leq\text{exp}{\left(-\sum\limits_{k=n}^{N}P(A_k)\right)}\to 0\]
+        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)\leq\text{exp}{\left(-\sum\limits_{k=n}^{\infty}P(A_k)\right)}\to 0\]
     \end{enumerate}
 \end{proof}
 \begin{lemma} (Лемма о групировке)\\
-    Пусть имеется семейтво $\mathcal{A}_t,\ t\in I$ независимых $\sigma$-алгебр. Возьмем $I_1,I_2,\dots\subset T: I_k\cap I_m=\emptyset,\ \forall k\ne m$ и для $I\subset T$ введем $\sigma\{I\}=\sigma\{\mathcal{A}_t,\ t\in I\}$. Тогда $\sigma\{I_1\}, \sigma\{I_2\}, \dots$ - независимые $\sigma$-алгербы.
+    Пусть имеется семейтво $\mathcal{A}_t,\ t\in T$ независимых $\sigma$-алгебр. Возьмем $I_1,I_2,\dots\subset T: I_k\cap I_m=\emptyset,\ \forall k\ne m$ и для $I\subset T$ введем $\sigma\{I\}=\sigma\{\mathcal{A}_t,\ t\in I\}$. Тогда $\sigma\{I_1\}, \sigma\{I_2\}, \dots$ - независимые $\sigma$-алгербы.
 \end{lemma}
+\section{Лекция 4}
+\subsection{Функция распределения и плотность}
+\begin{definition}
+    Пусть $(S, \tau)$ - топологическое пространство. Наименьшая $\sigma$-алгебра, содержащая все открытые множества называется Борелевской $\sigma$-алгебро и обозначается $\mathcal{B}(S)$
+\end{definition}
+\begin{definition}
+    Пусть $P$ - вероятностная мера на $(\R, \mathcal{B}(\R))$. Функция 
+    \[F(x)=P((-\infty, x])\]
+    называется функцией распределения вероятностной меры.
+\end{definition}
+\begin{theorem}
+    Функция распределения обладает следующими свойствами:
+    \begin{enumerate}
+        \item $F$ неубывает
+        \item $F$ непрерывна справа $\forall x\in \R$
+        \item $\lim\limits_{x\to -\infty}F(x)=0$
+        \item $\lim\limits_{x\to +\infty}F(x)=1$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}\tab
+    \begin{enumerate}
+        \item $x\leq y \Rightarrow (-\infty, x] \subset (-\infty, y] \Rightarrow P((-\infty, x])\leq P((-\infty, y]) \Rightarrow F(x)\leq F(y)$
+        \item Если $x_n$ монотонно стремится в $x$, то $(-\infty, x_n]\downarrow(-\infty, x]$, значит, по свойству непрерывности вероятностной меры, $P((-\infty, x_n]) \to P((-\infty,x])\\ \Rightarrow F(x_n)\to F(x)$.
+        \item и\ \ 4. напрямую следуют из непрерывности вероятностной меры.
+    \end{enumerate}
+\end{proof}
+\begin{theorem}
+    Если функция $F$ обладается свойствами $(1)-(4)$, то на $(\R, \mathcal{B}(\R))$ существует единственная вероятностная мера, такая, что $\forall x\in \R:$
+    \[F(x)=P((-\infty,x])\]
+    Это задает взаимно-однозначное соответствие между вероятностными мерами и функциями распределения.
+\end{theorem}
+\begin{definition}
+    Пусть $p(x)$ вещественная кусочно непрерывная функция. Если $\forall x\in \R: p(x)\geq 0$ и интеграл Римана
+    \[\int\limits_{\R}p(u)\ du=1\]
+    то такая $p(x)$ называется плотностью.
+\end{definition}
+\begin{statement}
+    \[F(x)=\int\limits_{-\infty}^{x}p(u)du\]
+    является функция распределения.\\
+    (для нее выполнены свойства $(1)-(4)$)
+\end{statement}
+\begin{example}
+    Равномерное распределение на $[a,b]\subset \R$
+    \[p(x)=\begin{cases}
+        \frac{1}{b-a},\ x\in [a,b],\\
+        0,\ \ \ \ x\not\in [a,b].
+    \end{cases}\]
+    \[
+    \begin{tikzpicture}[>=stealth, scale=1.2]
+    \def\a{-1.3}
+    \def\b{2.2}
+    \def\h{1.5}
+    \draw[->] (-2.5,0) -- (3,0) node[below] {$x$};
+    \draw[->] (0,-0.4) -- (0,2.5) node[left] {$y$};
+    \draw (\a,0.1) -- (\a,-0.1) node[below] {$a$};
+    \draw (\b,0.1) -- (\b,-0.1) node[below] {$b$};
+    \draw (0,\h) -- (0,\h) node[above right] {$\frac{1}{b-a}$};
+    \draw[->] (\a-0.15,0) -- (\a,0);
+    \draw[dashed] (\a,0) -- (\a,\h);
+    \draw[thick] (\a,\h) -- (\b,\h);
+    \draw[dashed] (\b,0) -- (\b,\h);
+    \draw[->] (\b+0.15,0) -- (\b,0);
+    \end{tikzpicture}
+    \]
+\end{example}
+\begin{example}
+    Экспоненциальное распределение с параметром $\lambda>0$
+    \[p(x)=\begin{cases}
+        \lambda e^{-\lambda x},\ x\geq 0,\\
+        0,\ \ \ \ \ \ \ x<0.
+    \end{cases}\]
+    \[
+    \begin{tikzpicture}[>=stealth, scale=1.3]
+    \draw[->] (-1,0) -- (4,0) node[below] {$x$};
+    \draw[->] (0,-0.4) -- (0,2.5) node[left] {$y$};
+    \draw (0,0.1) -- (0,-0.1) node[below left] {$0$};
+    \draw (0.1,1.5) -- (-0.1,1.5) node[left] {$\lambda$};
+    \draw[thick] (-1,0) -- (0,0);
+    \draw[thick,->] (-0.15,0) -- (0,0);
+    \draw[thick] (0,1.5) .. controls (0.5,0.9) and (1,0.55) .. (3.8,0.1);
+    %\draw[thick, domain=0:3.8, samples=100] plot (\x, {1.5*exp(-1.5*\x)});
+    \end{tikzpicture}
+    \]
+\end{example}
+\begin{example}
+    Гауссовское (нормальное) распределение
+    \[p(x)=\frac{1}{\sigma\sqrt{2\pi}}\cdot e^{-\frac{(x-a)^2}{2\sigma^2}}\]
+    \[
+    \begin{tikzpicture}[>=stealth, scale=1.3]
+    \def\a{1}
+    \draw[->] (-1.5,0) -- (3.5,0) node[below] {$x$};
+    \draw[->] (0,-0.4) -- (0,2.5) node[left] {$y$};
+    \draw (\a,0.1) -- (\a,-0.1) node[below] {$a$};
+    \draw[dashed] (\a,0) -- (\a,1.5);
+    %\draw (0.1,0.5) -- (-0.1,0.5) node[left] {$\frac{1}{\sigma\sqrt{2\pi}}$};
+    \draw[thick, domain=-1.5:3.5, samples=100] plot (\x, {1.5*exp(-(\x-\a)^2/0.5)});
+    \end{tikzpicture}
+    \]
+\end{example}
+\begin{exercise}
+    Доказать, что в каждом из этих случаев действительно выполнено
+    \[\int\limits_{\R} p(x)\ dx =1\]
+\end{exercise}
+\subsection{Случайные величины}
+\begin{definition}
+    Рассмотрим вероятностные пространства $(\Omega, \mathcal{F}),\ (S, \mathcal{B})$. Отображение $X: \Omega \to S$ называется $\mathcal{F}|\mathcal{B}$ измеримым (или случайным элементом), если $\forall B\in \mathcal{B}: X^{-1}(B)\in \mathcal{F}$. В этом случае, пишут $X\in \mathcal{F}|\mathcal{B}$.
+\end{definition}
+\begin{definition}
+    Рассмотрим вероятностные пространства $(\Omega, \mathcal{F})$ и $(\R, \mathcal{B}(\R))$. Если $X\in \mathcal{F}|\mathcal{B}(\R)$, то $X$ называется случайной величиной.
+\end{definition}
+\begin{theorem}
+    Рассмотрим $f: V \to S$ и систему $M$ подмножеств $S$. Определим множество $f^{-1}(M)=\{f^{-1}(B):B\in M\}$ и рассмотрим $\sigma\{f^{-1}(M)\}$. Тогда
+    \[\sigma\{f^{-1}(M)\}=f^{-1}(\sigma\{M\})\]
+\end{theorem}
+\begin{proof}
+    Упражнение.
+\end{proof}
+\begin{consequense}
+    Пусть $f:V\to S$ и $\mathcal{B}=\sigma\{M\}$. Пусть $f^{-1}(B)\in \mathcal{F}\ (B\in \mathcal{B})$.\\ 
+    Тогда $f\in \mathcal{F}|\mathcal{B}$.
+\end{consequense}
+\begin{consequense}
+    Пусть $(V, \tau)$ и $(S, \nu)$ - топологические пространства. Тогда $f: V\to S$ непрерывна $(f^{-1}(\nu)\subset \tau)$. Тогда $f\in \mathcal{B}(V)|\mathcal{B}(S)$
+\end{consequense}
+\subsection{Распределение случайного элемента}
+\begin{definition}
+    Рассмотрим вероятностыне пространства $(\Omega, \mathcal{F})$ и $(S, \mathcal{B})$. Пусть $X:\Omega \to S,\ X\in \mathcal{F}|\mathcal{B}$. Распределением случайного элемента $X$ называется вероятностная мера $P_X$ на $(S,\mathcal{B})$ такая, что
+    \[P_X(B)=P(X^{-1}(B))\]
+    для любого $B\in \mathcal{B}$.
+\end{definition}
+\begin{exercise}
+    Проверить, что $P_X$ является вероятностной мерой.
+\end{exercise}
+\begin{definition} 
+    Если случайный элемент $X$ распределен по распределению $Q$, то пишут $X \sim Q$
+\end{definition}
+\begin{definition}
+    Случайные элементы $X_k:\Omega \to S,\ k=1,\dots,n$ называются независимыми, если независимы $\sigma$-алгебры $\sigma\{X_1\}, \dots, \sigma\{X_n\}$, где\\
+    $\sigma\{X_i\}=\{X^{-1}_i(B),\ B\in \mathcal{B}\}$, что означает
+    \[P(X_1\in B_1, \dots, X_n\in B_n)=\prod\limits_{k=1}^{n}P(X_k\in B_k)\]
+\end{definition}
+\begin{definition} (Биномиальное распределение)\\
+    $X \sim B_{\epsilon}(n,p)$, где $n\in \N,\ 0<P<1$, если
+    \[P(x=k)=C_n^k p^k (1-p)^{n-k},\ k=0,1,\dots,m\]
+\end{definition}
+\begin{definition} (Распределение Пуассона)\\
+    $X\sim Pois(\lambda)$, если
+    \[P(x=k)=\frac{\lambda^k e^{-\lambda}}{k!},\ k\in \Z_+\]
+\end{definition}
+\begin{theorem} (Классическая теорема Пуассона)\\
+    Если $n\cdot p(n)\to \lambda>0,\ n\to \infty$, то
+    \[C_n^k p^k(n)(1-p(n))^{n-k}\to \frac{\lambda^k e^{-\lambda}}{k!}\]
+\end{theorem}
+\begin{proof}
+    \[p^k(n) = \frac{(n\cdot p(n))^k}{n^k} \to \frac{\lambda^k}{n^k}\]
+    Заметим, что
+    \[n\cdot p(n)\to \lambda \Rightarrow p(n)\to 0\]
+    Значит
+    \[(1-p(n))^{n-k}=\frac{(1-p(n))^n}{(1-p(n))^k}\to (1-p(n))^n\]
+    Таким обзаром
+    \[\frac{n!}{k!(n-k)!}\cdot p^k(n)(1-p(n))^{n-k}\to \frac{n!}{k!(n-k)!}\cdot \frac{\lambda^k}{n^k}(1-p(n))^n\]
+    Нам нужно, чтобы
+    \[\frac{n!}{n^k(n-k)!}\cdot (1-p(n))^n\to e^{-\lambda}\]
+    \[(1-p(n))^n=(1-p(n))^{\frac{n\cdot p(n)}{p(n)}}=((1-p(n))^{-\frac{1}{p(n)}})^{-n\cdot p(n)}\to e^{-\lambda}\]
+    Значит, остается доказать, что
+    \[\frac{n!}{n^k(n-k)!}\to 1\]
+    Действительно
+    \[\frac{n!}{n^k (n-k)!}=\frac{(n-k+1)!}{n^k}\to 1\]
+    Объединив результаты, получим
+    \[\frac{n!}{k!(n-k)!}\cdot p^k(n)(1-p(n))^{n-k}\to \frac{\lambda^k e^{-\lambda}}{k!}\]
+\end{proof}
+\textit{тут пропущена теорема которую я не понял}
+\section{Лекция 5}
+\subsection{Современная теорема Пуассона}
+\begin{theorem}
+    Пусть $X_1, \dots, X_n$ - независимые случайные элементы,\\
+    $P(X_i=1)=p_i,\ P(X_i=0)=1-p_i,\ S_n=X_1+\dots+X_n,\ Y\sim Pois(\lambda)$, где $\lambda=p_1+\dots+p_n$. Тогда
+    \[\sup\limits_{B\in \mathcal{B}(\R)}|P(S_n\in B)-P(Y\in B)|\leq \sum\limits_{k=1}^{n}p_k^2\]
+    Для доказательства этой теоремы потребуются две леммы
+\end{theorem}
+\begin{lemma}
+    Если $Y_1, \dots, Y_n$ независимые случайные величины, причем $Y_k \sim Pois(\lambda_k)$. Тогда
+    \[\sum\limits_{k=1}^{n}Y_k \sim Pois\left(\sum\limits_{k=1}^{n}\lambda_k\right)\]
+\end{lemma}
+\begin{proof}
+    Сначала докажем, что $Y_1 + Y_2 \sim Pois(\lambda_1+\lambda_2)$ при условии, что $Y_1 \sim Pois(\lambda_1),\ Y_2 \sim Pois(\lambda_2)$.
+    \begin{multline*}
+        P(Y_1+Y_2=m)\overset{(1)}{=}\sum\limits_{i=0}^{m}P(Y_1+Y_2=m,\ Y_1=i)=\\
+        =\sum\limits_{i=0}^{m}P(Y_1=i,\ Y_2=m-i)=\sum\limits_{i=0}^{m}P(Y_1=i)P(Y_2=m-i)\overset{(2)}{=}\tab[2.5cm]\\
+        \tab[1.5cm]\overset{(2)}{=}\sum\limits_{i=0}^{m}\left(\frac{\lambda_1^i e^{-\lambda_1}}{i!}\cdot \frac{\lambda_2^{m-i}e^{-\lambda_2}}{(m-i)!}\right)=\frac{e^{-(\lambda_1+\lambda_2)}}{m!}\cdot \sum\limits_{i=0}^{m} \left(\frac{m!}{i! (m-i)!}\lambda_1^i \lambda_2^{m-i}=\right)=\\
+        =\frac{e^{-(\lambda_1+\lambda_2)}}{m!}(\lambda_1+\lambda_2)^m
+    \end{multline*}
+    (1): По формуле полной вероятности\\
+    (2): Домножили и поделили на $m!$\\
+    Далее, индукция по $n$: база очевидна, $Y_1+\dots+Y_n=(Y_1+\dots+Y_{n-1})+Y_n$.\\
+    По предположению индукции $Y_1+\dots+Y_{n-1}\sim Pois(\lambda_1+\dots+\lambda_{n-1})$
+    Поэтому, если $Y_1+\dots+Y_{n-1}$ и $Y_n$ независимы, то
+    \[\sum\limits_{k=1}^{n}Y_k \sim Pois\left(\sum\limits_{k=1}^{n}\lambda_k\right)\]
+    \textit{Остается показать, что $Y_1+\dots+Y_{n-1}$ и $Y_n$ независимы}
+\end{proof}
+\begin{lemma}
+    Пусть $X, Y$ случайные величины. Тогда $\forall B\in \mathcal{B}$ выполнено:
+    \[|P(X\in B)-P(Y\in B)|\leq P(X\neq Y)\]
+\end{lemma}
+\begin{proof}
+    Рассмотрим разбиение $\Omega$ на две части: $Y(\omega)\in B$ и $Y(\omega)\not\in B$. Тогда по формуле полной вероятности:
+    \begin{multline*}
+        P(X\in B)-P(Y\in B)=P(X\in B,\ Y\in B)+\\
+        +P(X\in B,\ Y\not\in B)-P(Y\in B,\ X\in B)-P(Y\in B, X\not\in B)\leq \\
+        \leq P(X\in B,\ Y\not\in B)\leq P(X\neq Y)
+    \end{multline*}
+    Аналогично можно показать, что $P(Y\in B)-P(X\in B)\leq P(X\neq Y)$. Тогда 
+    \[|P(X\in B)-P(Y\in B)|\leq P(X\neq Y)\]
+\end{proof}
+Теперь можно перейти к доказательству теоремы. Напомним ее условие
+\begin{theorem}
+    Пусть $X_1, \dots, X_n$ - независимые случайные элементы,\\
+    $P(X_i=1)=p_i,\ P(X_i=0)=1-p_i,\ S_n=X_1+\dots+X_n,\ Y\sim Pois(\lambda)$, где $\lambda=p_1+\dots+p_n$. Тогда
+    \[\sup\limits_{B\in \mathcal{B}(\R)}|P(S_n\in B)-P(Y\in B)|\leq \sum\limits_{k=1}^{n}p_k^2\]
+\end{theorem}
+\begin{proof}
+    \begin{multline*}
+        |P(S_n\in B)-P(Y\in B)|=|P(X_1+\dots+X_n \in B)-P(Y\in B)|\overset{(1)}{\leq}\\
+        \overset{(1)}{\leq} P(X_1+\dots+X_n\neq Y)\overset{(2)}{=}P(X_1+\dots+X_n\neq Y_1+\dots+Y_n)\overset{(3)}{\leq}\\
+        \overset{(3)}{\leq} P\left(\bigcup\limits_{k=1}^{n}\{X_k\neq Y_k\}\right)\overset{(4)}{\leq} \sum\limits_{k=1}^{n}P(X_k\neq Y_k)
+    \end{multline*}
+    Пояснения:\\
+    (1): По лемме 2\\
+    (2): Так как
+    \[Y\sim Pois\left(\sum\limits_{k=1}^{n}p_k\right)\]
+    то по лемме 1 $P(Y\in B)=P(Y_1+\dots+Y_n\in B)$, где $Y_1,\dots,Y_n$ независимы и $Y_k \sim Pois(p_k)$\\
+    (3): $X_1+\dots+X_n\neq Y_1+\dots+Y_n \subset \bigcup\limits_{k=1}^{n}\{X_k\neq Y_k\}$ это можно показать, используя тот факт, что $A\subset B \Leftrightarrow \overline{B}\subset \overline{A}$.\\
+    (4): Суббаддитивность.\\ \\
+    Введем $V_1,\dots,V_n$ независимые с $Y_1,\dots,Y_n$ такие, что $P(V_k=0)=(1-p_k)e^{p_k}$ и $P(V_k=1)=1-P(V_k=0)$, причем $(1-p_k)e^{p_k}\leq 1$, так как $e^{-p_k}\geq(1-p_k)$.
+    Подберем $U_1,\dots,U_n$ такие, что 
+    \[U_k=\begin{cases}
+        1,\ \ p_k\\
+        0,\ \ 1-p_k
+    \end{cases}\]
+    и $\{U_k=0\}=\{V_k=0,\ Y_k=0\}$,\ $\{U_k=1\}=\Omega\setminus \{U_k=0\}$.\\
+    Отсюда
+    \begin{multline*}
+        P(U_k=0)=P(V_k=0, Y_k=0)=P(V_k=0)P(Y_k=0)=\\=(1-p_k)e^{p_k}\cdot \frac{\lambda^0 e^{-p_k}}{0!}=1-p_k
+    \end{multline*}
+    а следовательно $P(U_k=1)=1-(1-p_k)=p_k$, значит, случайная величина $X_k$ совпадает с $U_k$ и нам достаточно оценить $P(U_k\neq Y_k)$.
+    \[P(U_k\neq Y_k)=P(U_k\neq Y_k,\ Y_k=0)+P(U_k\neq Y_k,\ Y_k=1)+P(U_k\neq Y_k,\ Y_k\geq 2)\]
+    Разберем каждое слагаемое:
+    \begin{enumerate}
+        \item 
+        \[P(U_k\neq Y_k,\ Y_k=0)=P(U_k=1,\ Y_k=0)\]
+        \item Вспомним, что $\{U_k=0\}=\{V_k=0,\ Y_k=0\}$. Тогда
+        \[P(U_k\neq Y_k,\ Y_k=1)=P(U_k=0,\ Y_k=1)=P(V_k=0,\ Y_k=0,\ Y_k=1)=0\]
+        \item
+        \[P(U_k\neq Y_k,\ Y_k\geq 2)=P(Y_k\geq 2)\]
+    \end{enumerate}
+    Итого:
+    \[P(U_k\neq Y_k)=P(U_k=1,\ Y_k=0)+P(Y_k\geq 2)\]
+    Снова анализируем слагаемые:
+    \begin{enumerate}
+        \item 
+        \begin{multline*}
+            P(U_k=1,\ Y_k=0)=P(Y_k=0)-P(U_k=0,\ Y_k=0)=\\
+            =P(Y_k=0)-P(V_k=0,\ Y_k=0,\ Y_k=0)=\\
+            =P(Y_k=0)-P(V_k=0,\ Y_k=0)=\\
+            =e^{-p_k}-(1-p_k)e^{p_k}e^{-p_k}=p_k+e^{-p_k}-1
+        \end{multline*}
+        \item 
+        \[P(Y_k\geq 2)=1-P(Y_k=0)-P(Y_k=1)=1-e^{-p_k}-p_k e^{-p_k}\]
+    \end{enumerate}
+    Получили:
+    \begin{multline*}
+        P(U_k\neq Y_k)=p_k+e^{-p_k}-1+1-e^{-p_k}-p_k e^{-p_k}=\\=p_k-p_ke^{-p_k}=p_k(1-e^{-p_k})\leq p_k^2
+    \end{multline*}
+    Таким образом:
+    \[|P(S_n\in B)-P(Y\in B)|\leq \sum\limits_{k=1}^{n}P(U_k\neq Y_k)\leq \sum\limits_{k=1}^{n}p_k^2\]
+\end{proof}
+\noindent В доказательстве мы воспользовались теоремой
+\begin{theorem} (Теорема Ломницкого-Улама)\\
+    Пусть $(S_t,\mathcal{B}_t,Q_t)$ - семейтво вероятностных пространств. Тогда на некотором вероятностном пространтсве $(\Omega, \mathcal{F}, P)$ можно построить семейство независимых случайных элементов $X_t: \Omega\to S_t,\ X_t\in \mathcal{F}|\mathcal{B}_t$, причем $P_{X_t}=Q_t,\ t\in T$. Это означает, что всегда можно построить семейство независимых случайных элементов, имеющих заданное распределение.
+\end{theorem}
+\subsection{Расширенные случайные величины}
+\begin{definition}
+    Рассмотрим $\overline{\R}=\R\cup \{+\infty,-\infty\}$. Отображение $X: \Omega\to \overline{\R}$ назовем расширенной случайной величиной, если $X\in \mathcal{F}|\mathcal{B}(\overline{\R})$, где\\
+    $\mathcal{B}(\overline{\R})=\{B,\ B\cup\{+\infty\},\ B\cup\{-\infty\},\ B\cup\{+\infty,\ -\infty\}: B\in \mathcal{B}(\R)\}$ 
+\end{definition}
+\begin{statement}
+    $X$ - случайная величина (расширенная) $\Leftrightarrow \forall x\in \R:\\
+    \{\omega: X(\omega)\leq x\}\in \mathcal{F}$
+\end{statement}
+\begin{theorem}
+    Пусть $X_1, X_2, \dots $ - случайные величины (расширенные). Тогда справедливы следующие утверждения
+    \begin{enumerate}
+        \item $\sup\limits_n X_n,\ \inf\limits_n X_n$ - случайные величины (расширенные)
+        \item $\lim\limits_{n\to\infty}\sup\limits_n X_n,\ \lim\limits_{n\to\infty}\inf\limits_n X_n$ - случайные величины (расширенные).
+        \item Если существует предел $\lim\limits_{n\to\infty}X_n$, то он является случайной величиной (расширенной).
+    \end{enumerate}
+\end{theorem}
+\begin{proof} Будем доказывать пользуясь утверждением
+    \begin{enumerate}
+        \item $\forall x\in \R$:
+        \[\{\omega: \sup\limits_n X_n\leq x\}=\bigcap\limits_{n=1}^{\infty} \{\omega: X_n(\omega)\leq x\}\in \mathcal{F}\]
+        \[\{\omega: \inf\limits_n X_n\leq x\}=\bigcup\limits_{n=1}^{\infty} \{\omega: X_n(\omega)\leq x\}\in \mathcal{F}\]
+        \item Сведем к первому пункту
+        \[\lim\limits_{n\to\infty}\sup\limits_n X_n(\omega)=\inf\limits_n \sup\limits_{k\leq n}X_k(\omega)\]
+        \[\lim\limits_{n\to\infty}\inf\limits_n X_n(\omega)=\sup\limits_n \inf\limits_{k\leq n}X_k(\omega)\]
+        \item Если существует предел, то он соппадает с верхним и нижним пределами, значит
+        \[\lim\limits_{n\to\infty}X_n=\lim\limits_{n\to\infty}\sup\limits_n X_n\]
+        а это, в свою очередь, является случайной величиной по пункту 2.
+    \end{enumerate}
+\end{proof}
+\section{Лекция 6}
+\subsection{Математическое ожидание}
+\begin{definition}
+    Пусть $(\Omega, \mathcal{F}, P)$ - вероятностное пространство, $X:\Omega \to \R,\\
+    X\in \mathcal{F}|\mathcal{B}(\R)$. Математическим ожиданием случайной величины $X$ назовем интеграл Лебега от случайной величины по вероятностной мере
+    \[EX=\int\limits_{\Omega}X\ d(P)\]
+\end{definition}
+\noindent Таким образом, для определения понятия математического ожидания случайной величины, необходимо ввести понятие интеграла Лебега от случайной величины по вероятностной мере.
+\subsection{Построение интеграла Лебега}
+Построение интеграла Лебега происходит в три этапа:
+\begin{enumerate}
+    \item Для простых случайных величин.
+    \item Для неотрицательных случайных величин.
+    \item Для произвольных случайных величин. 
+\end{enumerate}
+\subsubsection{Первый этап}
+\begin{definition}
+    Случайная величина $X$ называется простой, если 
+    \[X(\omega)=\sum\limits_{k=1}^{n}a_k I_{A_k}\]
+    где $A_1, \dots, A_n\in \mathcal{F}$ образуют разбиение $\Omega$.
+\end{definition}
+\begin{definition}
+    Если $X$ - простая случайная величина, то 
+    \[EX=\int\limits_{\Omega}X\ dP=\sum\limits_{k=1}^{n}a_k P(A_k)=\sum\limits_{k=1}^{n}a_k P(X=a_k)\]
+\end{definition}
+\begin{statement}
+    Приведенное выше определение корректно.
+\end{statement}
+\begin{proof}
+    Пусть $B_1,\dots,B_m$ - другое разбиение $\Omega$ и 
+    \[X=\sum\limits_{j=1}^{m}b_j I_{B_j}\]
+    необходимо показать, что
+    \[\sum\limits_{k=1}^{n}a_k P(A_k)=\sum\limits_{j=1}^{m}b_j P(B_j)\]
+    Рассмотрим $C_{kj}=A_k\cap B_j$ - новое разбиение $\Omega$. Тогда, по формуле полной вероятности:
+    \begin{multline*}
+        \sum\limits_{k=1}^{n}a_k P(A_k)=\sum\limits_{k=1}^{n} a_k \sum\limits_{j=1}^{m}P(A_k\cap B_j)=\sum\limits_{k=1}^{n}\sum\limits_{j=1}^{m}a_k P(c_{kj})=\\
+        =\sum\limits_{(k,j)\in J} a_k P(C_{kj})=\sum\limits_{(k,j)\in J} b_j P(C_{kj})=\sum\limits_{j=1}^{m} b_j P(B_j)
+    \end{multline*}
+    где $J=\{(k,j): C_{kj}\neq \emptyset\}$. Если $C_{kj}\neq \emptyset$, то $X(\omega)=a_k=b_j,\ \forall \omega\in C_{kj}$
+\end{proof}
+\begin{theorem} Для простых случайных величин $X$ и $Y$ справедливы следующие утверждения:
+    \begin{enumerate}
+        \item $E(X+Y)=EX+EY$.
+        \item $\forall c\in \R: E(cX)=c\cdot EX$.
+        \item Если $X\geq 0$, то $EX\geq 0$.
+        \item Если $X\leq Y$, то $EX\leq EY$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item Рассмотрим два случая
+        \begin{enumerate}
+            \item Для $X$ и $Y$ одно и то же разбиение $A_1, \dots, A_n$ на $\Omega$. В этом случае, $\forall \omega \in A_k: X+Y(\omega)=X(\omega)+Y(\omega)=a_k+b_k$. Отсюда
+            \[E(X+Y)=\sum\limits_{k=1}^{n}(a_k+b_k)P(A_k)=\sum\limits_{k=1}^{n}a_k P(A_k)+\sum\limits_{k=1}^{n}b_kP(A_k)=EX+EY\]
+            \item Если разбиения $A_1,\dots, A_n$ для $X$ и $B_1,\dots,B_m$ для $Y$ оказались разными, то рассмотрим новое разбиение $C_{kj}=A_k\cap B_j$. Таким образом, свели к первому случаю.
+        \end{enumerate}
+        \item $\forall c\in \R$:
+        \[E(cX)=\sum\limits_{k=1}^{n}c\cdot a_k P(A_k)=c\cdot \sum\limits_{k=1}^{n}a_k P(A_k)=c\cdot EX\]
+        \item Если $X\geq 0$, то $a_k\geq 0$. Значит
+        \[EX=\sum\limits_{k=1}^{n}a_k P(A_k)\geq 0\]
+        \item Пусть $X\geq Y \Rightarrow X-Y\geq 0 \Rightarrow E(X-Y)\geq 0$. Тогда из доказанных свойств:
+        \[E(X-Y)=E(X+(-1)\cdot Y)=EX+E((-1)\cdot Y)=EX-EY\geq 0\]
+    \end{enumerate}
+\end{proof}
+\subsubsection{Второй этап}
+\begin{definition}
+    Пусть $X\geq 0$ случайная величина. Тогда
+    \[EX=\sup\{EY: 0\leq Y\leq X,\ Y - \text{простая}\}\]
+\end{definition}
+\begin{lemma}
+    Пусть $X\geq 0$ случайная величина. Тогда существует последовательность простых функций $X_n\geq 0$ таких, что $X_n\to X$ и $X_{n}(\omega)\leq X_{n+1}(\omega),\ \forall \omega\in \Omega$
+\end{lemma}
+\begin{proof}
+    Возьмем последовательность
+    \[X_n=\min\{(2^{-n}\ [2^n X]\ ),\ n\}\]
+    Заметим, что
+    \[X_n(\omega)=\begin{cases}
+        k2^{-n},\ \ k2^{-n}\leq X(\omega)<(k+1)2^{-n},\ k=0, 1, \dots, n2^n-1,\\
+        n\ \ \ \ \ , \ \ X(\omega)\geq n.
+    \end{cases}\]
+    Тогда $X_n$ не убывает и $X_n\to X$.
+\end{proof}
+\begin{lemma}
+    Пусть $X\geq 0$ случайная величина. Тогда для любой последовательности простых функций $0\leq X_n\leq X,\ X_n\to X$ выполнено, что $EX_n\to EX$.
+\end{lemma}
+\begin{proof}
+    $X_n$ - простые и $X_{n}\leq X_{m+1} \Rightarrow EX_n \leq EX_{n+1}$. При этом
+    \[EX=\sup\{EY: 0\leq Y\leq X,\ Y - \text{простая}\}\]
+    значит существует предел 
+    \[\lim\limits_{n\to\infty}EX_n=a\leq EX\]
+    Покажем, что выполнено и обратное неравенство. Для этого докажем, что для любой простой фунции $0 \leq Y\leq X$ выполнено, что $EY\leq a$. Если $Y\equiv 0$, то утверждение верно. Пусть
+    \[Y=\begin{cases}
+        0=b_0< b_1 < \dots < b_k\\
+        \ \ \ \ \ \ p_0,\ \ p_1\ \ ,\  \dots\ ,\ p_k
+    \end{cases}\]
+    Тогда
+    \[EY=\sum\limits_{j=1}^{j}b_j p_j\]
+    Введем $Y_n=(1-\epsilon)Y \cdot I\{(1-\epsilon)Y\leq X\},\ n\in \N,\ \epsilon\in (0,1)$. Из определения
+    $Y_n\leq X_n \Rightarrow EY_n\leq EX_n\leq a$. Пусть 
+    \[B_j=\{\omega: Y(\omega)=b_j\},\ C_{jn}=\{(1-\epsilon)Y\leq X_n\}\]
+    Тогда $Y(\omega)=(1-\epsilon)b_j$, если $\omega\in B_j\cap C_{jn}$. Получаем, что
+    \[EY_n=\sum\limits_{j}(1-\epsilon)b_j P(C_{jn})\]\
+    При этом, по свойству непрерывности вероятностной меры
+    \[P(C_{jn})\to P(B_j)\]
+    следовательно
+    \[EY_n=\sum\limits_{j}(1-\epsilon)b_j P(C_{jn})\to (1-\epsilon)\sum\limits_{j}b_j P(B_{j})=(1-\epsilon)EY\]
+    Получили, что $\forall \epsilon\in (0,1):$
+    \[(1-\epsilon)EY\leq a\]
+    тогда, устремив $\epsilon\to 0$, получим для любой $Y: EY\leq a \Rightarrow EX\leq a$. Из полученных неравентв, следует, что
+    \[\lim\limits_{n\to\infty}EX_n=EX\]
+\end{proof}
+\begin{lemma}
+    Пусть $X, Y\geq 0$ случайные величины. Тогда
+    \begin{enumerate}
+        \item $E(X+Y)=EX+EY$.
+        \item $\forall c\geq 0: E(cX)=c\cdot EX$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}\tab
+    \begin{enumerate}
+        \item Возьмем неубывающие последовательности простых функций $X_n\to X,\\
+        Y_n\to Y$. Тогда $X_n+Y_n\to X+Y$ и по лемме 2: 
+        \[E(X_n+Y_n)=EX_n+EY_n\to E(X+Y)\]
+        \item Возьмем неубывающую последовательность простых функций $X_n\to X$. Тогда $cX_n\to cX$ и $E(cX_n)\to E(cX)$ и по лемме 2:
+        \[E(cX_n)=c\cdot E(X_n)\to c\cdot E(X)\]
+    \end{enumerate}
+\end{proof}
+\subsubsection{Третий этап}
+\begin{comm}
+    Заметим, что любую функцию $X:\Omega\to \R$ можно представить в виде $X=X^+-X^-$, где 
+    \[X^+=\max\{X,\ 0\}=X\cdot I\{X\geq 0\},\ \ X^-=-\min\{X, 0\}=-X\cdot I\{X\leq 0\}\]
+\end{comm}
+\begin{definition} Пусть $X$ - произвольная случайная величина. Тогда
+    \[EX=EX^+-EX^-\]
+    по определению положим, что $EX$ не существует, если $EX^+=+\infty$ и $EX^-=+\infty$ одновременно. Также по определению для любой константы $+\infty - c=+\infty$ и $c - \infty = -\infty$
+\end{definition}
+\begin{definition}
+    Если $EX\in \R$, то случайная величина $X$ называется интегрируемой по Лебегу и обозначается $X\in \mathcal{L}^1$
+\end{definition}
+\begin{theorem}
+    Для произвольной случайной величины справедливы следующие утверждения:
+    \begin{enumerate}
+        \item Если $Y\leq X$ и $X\in \mathcal{L}^1$, то $Y\in \mathcal{L}^1$.
+        \item Если $X,Y\in \mathcal{L}^1$ и $Y\leq X$, то $EY\leq EX$.
+        \item Если $X\in \mathcal{L}^1$, то $|EX|\leq E|X|$.\
+        \item $\mathcal{L}^1$ - линейное пространство.
+        \item $E$ - линейный функционал.
+    \end{enumerate}
+\end{theorem}
 \end{document}
