@@ -458,7 +458,7 @@
 \begin{theorem}
     Функция распределения обладает следующими свойствами:
     \begin{enumerate}
-        \item $F$ неубывает
+        \item $F$ не убывает
         \item $F$ непрерывна справа $\forall x\in \R$
         \item $\lim\limits_{x\to -\infty}F(x)=0$
         \item $\lim\limits_{x\to +\infty}F(x)=1$
@@ -904,4 +904,101 @@
         \item $E$ - линейный функционал.
     \end{enumerate}
 \end{theorem}
+\section{Лекция 7}
+\begin{theorem} (Теорема о монотонной сходимости)\\
+    Пусть $X_n\geq 0$ случайные величины и $X_n\nearrow X$. Тогда $EX_n\to EX$.
+\end{theorem}
+\begin{proof}
+    Пусть
+    \[\begin{matrix}
+        0 \leq Y_{n,1}\nearrow  X_1\\
+        0 \leq Y_{n,2}\nearrow  X_2\\
+        \vdots\\
+        0 \leq Y_{n,k}\nearrow  X_k
+    \end{matrix}\]
+    где $X_1\leq X_2\leq \dots \leq X_k \to X,\ Y_{n,i}$ - простые. Рассмотрим  
+    \[\begin{matrix}
+        Y_{1,1}\ \leq Y_{2,1}\leq \dots \leq Y_{k,1} \leq \dots \leq Y_{n,1} \nearrow X_1\\
+        \vdots\\
+        Y_{1,k}\ \leq Y_{2,k}\leq \dots \leq Y_{k,k} \leq \dots \leq Y_{n,k} \nearrow X_k
+    \end{matrix}\]
+    и определим 
+    \[0\leq Z_k := \max\limits_{1\leq i,j\leq k}Y_{i,j}\nearrow Z\]
+    Таким образом
+    \[0\leq Y_{n,k}\leq Z_k\leq X_k\leq X \eqno{(1)}\]
+    После предельного перехода при $k\to \infty$, получим
+    \[0\leq X_n\leq Z\leq X\]
+    После предельного перехода при $n\to \infty$, получим
+    \[0\leq Z_n\nearrow X \eqno{(2)}\]
+    Так как $X_n\leq X$, то $EX_n\leq EX$, а значит
+    \[\lim\limits_{n\to\infty} EX_n\leq EX\]
+    Также из $(1)$ и $(2)$ имеем:
+    \[EZ_n\leq EX_n\]
+    и как следствие 
+    \[EX\leq \lim\limits_{n\to\infty} EX_n\]
+\end{proof}
+\begin{statement}
+    Рассмотрим вероятностные пространства $(\Omega, \mathcal{F}, P),\ (S, \mathcal{B}, P_X),\\
+    X\in \mathcal{F}|\mathcal{B}$, где $\forall B\in \mathcal{B}: P_X(B)=P(X^{-1}(B))$, т.е $P_X$ - мера на $(S,\mathcal{B})$, индуцированная $X$. Также рассмотрим вероятностное пространство $(\R,\ \mathcal{B}(\R))$ и $h\in \mathcal{\mathcal{B}}|\mathcal{B}(\R)$. Теперь рассмотрим композицию отображений $h(X(\omega))\in \mathcal{F}|\mathcal{B}(\R)$. Тогда оба интеграла существуют или не существуют одновременно, и если существуют, то равны:
+    \[Eh(X)=\int\limits_{\Omega}h(X(\omega))P(d\omega)=\int\limits_{S}h(x)P_X(dx)\]
+\end{statement}
+\begin{proof}
+    Сначала пусть $h$ - индикатор:
+    \[h(x)=I_B(x)=\begin{cases}
+        1,\ x\in B,\\
+        0,\ x\not\in B
+    \end{cases}\]
+    \[\int\limits_{S}h(x)P_X(dx)=1\cdot P_X(B)=P(X\in B)\]
+    \[\int\limits_{\Omega}h(X(\omega))P(d\omega)=1\cdot P(X^{-1}(B))\]
+    Тогда формула будет верна для линейной комбинации индикаторов, а значит для простых $h\geq 0$. По теореме о монотонной сходимости, формула будет верна для произвольной
+    \[h=h^+-h^-\]
+\end{proof}
+\begin{comm}
+    Пусть
+    \[X=\begin{cases}
+        x_1,\ x_2, \dots\\
+        p_1,\ p_2, \dots
+    \end{cases}\]
+    \[Eh(x)=\sum\limits_{h(x_n)\geq 0}h(x_n)P(X=x_n)+\sum\limits_{h(x_n)< 0}h(x_n)P(X=x_n)\]
+    То есть конечное $Eh(x)$ существует, если 
+    \[\sum\limits_{n} |h(x_n)|\cdot P(X=x_n)<\infty\]
+\end{comm}
+\begin{theorem} (Неравенство Маркова)\\
+    Пусть $f:R_+\to R_+,\ f$ - не убывает. Тогда для любой случайной величины $X$ и $\forall t\geq 0$:
+    \[Ef(|X|)\geq f(t)\cdot P(|X|\geq t)\]
+\end{theorem}
+\begin{proof}
+    \[f(|X|)\geq f(|X|)\cdot I\{|X|\geq t\}\geq f(t)\cdot I\{|X|\geq t\}\]
+    Значит
+    \[Ef(|X|)\geq E(f(t)\cdot I\{|X|\geq t\})=f(t)\cdot E(I\{|X|\geq t\})=f(t)\cdot P(|X|\geq t)\]
+\end{proof}
+\subsection{Дисперсия случайной величины}
+\begin{definition}
+    Рассмотрим случайную величину $X$. Пусть $X\in \mathcal{L}^1,\\
+    (X-EX)^2\in \mathcal{L}^1$. Тогда дисперсией случайной величины $X$ называется выражение
+    \[\var{X}=E(X-EX)^2\]
+\end{definition}
+\begin{comm}
+    $(X-EX)^2=X^2-2XEX+(EX)^2\in \mathcal{L}^1 \Rightarrow X\in \mathcal{L}^2$
+\end{comm}
+\begin{comm}
+    Если $X$ - дискретная случайная велисина, то
+    \[\var{X}=\sum\limits_{n}(X_n-EX)^2 P(X=x_n)\]
+\end{comm}
+\begin{theorem}
+    Пусть $X_1, X_2, \dots \in \mathcal{L}^2$. Тогда 
+    \[\var\left(\sum\limits_{k=1}^{n} X_k\right)=\sum\limits_{k=1}^{n}\var{X_k}\]
+\end{theorem}
+\begin{proof}
+    \begin{multline*}
+        \var{\left(\sum\limits_{k=1}^{n}X_k\right)}=E\left(\sum\limits_{k=1}^{n}X_k-E\left(\sum\limits_{k=1}^{n}X_k\right)\right)^2\overset{(1)}{=}\\
+        \overset{(1)}{=}E\left(\sum\limits_{k=1}^{n}\left(X_k-EX_K\right)\right)^2\overset{(2)}{=}E\left(\sum\limits_{i,j=1}^{n}(X_i-EX_i)(X_j-EX_j)\right)\overset{(1)}{=}\\
+        \overset{(1)}{=}\sum\limits_{i,j=1}^{n}E((X_i-EX_i)(X_j-EX_j))\overset{(3)}{=}
+    \end{multline*}
+    (1): По линейности математического ожидания:
+    \[E\left(\sum\limits_{k=1}^{n}X_k\right)=\sum\limits_{k=1}^{n}EX_k\]
+    (2): Поскольку 
+    \[\left(\sum\limits_{k=1}^{n}a_k\right)^2=(a_1+\dots+a_n)(a_1+\dots+a_n)\]
+    (3): Поскольку $U,V\in \mathcal{L}^1$, то из $0\leq |U\cdot V|\leq \frac{1}{2}(U^2+V^2)$ получаем $U\cdot V\in \mathcal{L}^1$
+\end{proof}
 \end{document}
