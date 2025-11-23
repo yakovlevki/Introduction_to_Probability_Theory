@@ -963,15 +963,6 @@
     То есть конечное $Eh(x)$ существует, если 
     \[\sum\limits_{n} |h(x_n)|\cdot P(X=x_n)<\infty\]
 \end{comm}
-\begin{theorem} (Неравенство Маркова)\\
-    Пусть $f:R_+\to R_+,\ f$ - не убывает. Тогда для любой случайной величины $X$ и $\forall t\geq 0$:
-    \[Ef(|X|)\geq f(t)\cdot P(|X|\geq t)\]
-\end{theorem}
-\begin{proof}
-    \[f(|X|)\geq f(|X|)\cdot I\{|X|\geq t\}\geq f(t)\cdot I\{|X|\geq t\}\]
-    Значит
-    \[Ef(|X|)\geq E(f(t)\cdot I\{|X|\geq t\})=f(t)\cdot E(I\{|X|\geq t\})=f(t)\cdot P(|X|\geq t)\]
-\end{proof}
 \subsection{Дисперсия случайной величины}
 \begin{definition}
     Рассмотрим случайную величину $X$. Пусть $X\in \mathcal{L}^1,\\
@@ -982,23 +973,177 @@
     $(X-EX)^2=X^2-2XEX+(EX)^2\in \mathcal{L}^1 \Rightarrow X\in \mathcal{L}^2$
 \end{comm}
 \begin{comm}
-    Если $X$ - дискретная случайная велисина, то
+    Если $X$ - дискретная случайная величина, то
     \[\var{X}=\sum\limits_{n}(X_n-EX)^2 P(X=x_n)\]
 \end{comm}
+\begin{definition}
+    Рассмотрим случайные величины $X$ и $Y$. Пусть $X,Y\in \mathcal{L}^1,\\
+    (X-EX)\in \mathcal{L}^1$. Тогда ковариацией случайных величин $X$ и $Y$ называется выражение
+    \[\cov{(X,Y)}=E((X-EX)(Y-EY))\]
+\end{definition}
+\begin{comm}
+    \[\cov{(X,X)}=\var{X}\]
+\end{comm}
 \begin{theorem}
-    Пусть $X_1, X_2, \dots \in \mathcal{L}^2$. Тогда 
-    \[\var\left(\sum\limits_{k=1}^{n} X_k\right)=\sum\limits_{k=1}^{n}\var{X_k}\]
+    Пусть $X_1, X_2, \dots\in \mathcal{L}^2$ - случайные величины. Тогда 
+    \[\var\left(\sum\limits_{k=1}^{n} X_k\right)=\sum\limits_{k=1}^{n}\var{X_k}+2 \sum\limits_{1\leq i<j\leq n} \cov{(X_i,X_j)}\]
 \end{theorem}
 \begin{proof}
     \begin{multline*}
         \var{\left(\sum\limits_{k=1}^{n}X_k\right)}=E\left(\sum\limits_{k=1}^{n}X_k-E\left(\sum\limits_{k=1}^{n}X_k\right)\right)^2\overset{(1)}{=}\\
         \overset{(1)}{=}E\left(\sum\limits_{k=1}^{n}\left(X_k-EX_K\right)\right)^2\overset{(2)}{=}E\left(\sum\limits_{i,j=1}^{n}(X_i-EX_i)(X_j-EX_j)\right)\overset{(1)}{=}\\
-        \overset{(1)}{=}\sum\limits_{i,j=1}^{n}E((X_i-EX_i)(X_j-EX_j))\overset{(3)}{=}
+        \overset{(1)}{=}\sum\limits_{i,j=1}^{n}E((X_i-EX_i)(X_j-EX_j))=\sum\limits_{i,j=1}^{n}\cov{(X_i,X_j)}
     \end{multline*}
     (1): По линейности математического ожидания:
     \[E\left(\sum\limits_{k=1}^{n}X_k\right)=\sum\limits_{k=1}^{n}EX_k\]
     (2): Поскольку 
     \[\left(\sum\limits_{k=1}^{n}a_k\right)^2=(a_1+\dots+a_n)(a_1+\dots+a_n)\]
-    (3): Поскольку $U,V\in \mathcal{L}^1$, то из $0\leq |U\cdot V|\leq \frac{1}{2}(U^2+V^2)$ получаем $U\cdot V\in \mathcal{L}^1$
+    Итак, поскольку $\cov{(X,X)}=\var{X}$, то 
+    \[\var\left(\sum\limits_{k=1}^{n} X_k\right)=\sum\limits_{k=1}^{n}\var{X_k}+2 \sum\limits_{1\leq i<j\leq n} \cov{(X_i,X_j)}\]
 \end{proof}
+\begin{consequense}
+    Пусть $X_1, X_2, \dots\in \mathcal{L}^2$ - независимые случайные величины. Тогда
+    \[\var\left(\sum\limits_{k=1}^{n}X_k\right)=\sum\limits_{k=1}^{n}\var{X_k}\]
+\end{consequense}
+\begin{proof}
+    Если $X_1,\dots,X_n$ - независимы в совокупности, то они попарно независимы, тогда независимы величины $X_i-EX_i$ и $X_j-EX_j$. Тогда
+    \[E((X_i-EX_i)(X_j-EX_j))=E(X_i-EX_i)\cdot E(X_j-EX_j)=0\]
+    так как
+    \[E(X_i-EX_i)=EX_i-EX_i=0\]
+\end{proof}
+\subsection{Неравенство Маркова}
+\begin{theorem} (Неравенство Маркова)\\
+    Пусть $f:R_+\to R_+,\ f$ - не убывает. Тогда для любой случайной величины $X$ и $\forall t\geq 0$:
+    \[Ef(|X|)\geq f(t)\cdot P(|X|\geq t)\]
+\end{theorem}
+\begin{proof}
+    \[f(|X|)\geq f(|X|)\cdot I\{|X|\geq t\}\geq f(t)\cdot I\{|X|\geq t\}\]
+    Значит
+    \[Ef(|X|)\geq E(f(t)\cdot I\{|X|\geq t\})=f(t)\cdot E(I\{|X|\geq t\})=f(t)\cdot P(|X|\geq t)\]
+\end{proof}
+\begin{consequense} (Неравенство Бьенеме-Чебышёва)\\
+    \[P(|X-EX|\geq \epsilon)\leq \frac{\var{X}}{\epsilon^2}\]
+\end{consequense}
+\begin{proof}
+    Возьмем $f(t)=t^2$. По неравенству Маркова:
+    \[P(|X-EX|\geq \epsilon)\leq \frac{Ef(|X-EX|)}{f(\epsilon)}=\frac{E(X-EX)^2}{\epsilon^2}=\frac{\var{X}}{\epsilon^2}\]
+\end{proof}
+\subsection{Бернуллиевские случайные величины}
+\begin{definition}
+    Случайная величина $X$ называется бернуллиевской, если она принимает всего два значения $0$ и $1$ с вероятностями
+    \[P(X=1)=p,\ \ P(X=0)=1-p\]
+\end{definition}
+\begin{theorem} (Теорема Бернулли)\\
+    Пусть $X_1,X_2,\dots$ независимые случайные Бернуллиевские случайные величины, $S_n=X_1+\dots+X_n$. Тогда $\forall \epsilon>0$
+    \[P\left(\ \left|\frac{S_n}{n}-p\right|\geq \epsilon\right)\to 0,\ n\to \infty\]
+    Это означает, что $\frac{S_n}{n}$ при больших $n$ имеют как-бы неслучайный порядок поведения.
+\end{theorem}
+\begin{proof}
+    \begin{multline*}
+        p\left(\ \left|\frac{S_n}{n}-\frac{1}{n}\cdot \sum\limits_{k=1}^{n}EX_k\right|\geq \epsilon\right)=P(|S_n-ES_n|\geq n\epsilon)\overset{(1)}{\leq}\frac{\var{S_n}}{(n\epsilon)^2}=\\
+        =\frac{1}{n^2\epsilon^2}\cdot \sum\limits_{k=1}^{n}\var{X_k}\leq \frac{C\cdot n}{n^2\epsilon^2}=\frac{C}{n\epsilon^2}\to 0,\ n\to \infty
+    \end{multline*}
+    (1): По неравенству Бьенеме-Чебышёва.
+\end{proof}
+\begin{definition}
+    Случайные величины $Z_n$ сходятся по вероятности в $Z$, если $\forall \epsilon>0:$
+    \[P(|Z_n-Z|\geq \epsilon)\to 0\]
+    обозначают
+    \[Z_n\overset{P}{\to}Z\]
+\end{definition}
+\noindent Таким образом, теорема Бернулли показывает, что 
+\[\frac{S_n}{n}\overset{P}{\to}p,\ n\to \infty\]
+Это простейшая (слабая) форма закона больших чисел.
+\subsection{Теорема Вейерштрасса об аппроксимации}
+\begin{theorem} (Теорема Вейерштрасса об аппроксимации)\\
+    Пусть $f(x)$ непрерывна на $[a,b]$. Тогда $\forall \epsilon>0$ существует многочлен $P_n(x)$ такой, что
+    \[\sup\limits_{x\in [a,b]}|f(x)-P_n(x)|<\epsilon\]
+\end{theorem}
+\begin{proof}
+    Временно пропущено
+\end{proof}
+\section{Лекция 8}
+\subsection{Стабильность случайных величин}
+\begin{lemma}
+    $E|X|=0 \Leftrightarrow X=0$ почти наверное, то есть $\forall \omega\not\in A,\\ P(A)=0: X(\omega)=0$
+\end{lemma}
+\begin{proof}
+    Достаточно доказать для неотрицательных случаных величин, поскольку $X=X^+-X^-$ и
+        \[X=0 \Leftrightarrow \begin{cases}
+            X^+=0\\
+            X^-=0
+        \end{cases}\]
+        Далее $X\geq 0$.
+    \begin{itemize}
+        \item[($\Rightarrow$):] Пусть $E|X|=0$.
+        По неравенству Маркова $\forall n\in \N$:
+        \[P\left(|X|\geq \frac{1}{n}\right)\leq \frac{E|X|}{\frac{1}{n}}=0\]
+        \[\{|X|>0\}=\bigcup\limits_{n=1}^{\infty}\{|X|\geq \frac{1}{n}\}\]
+        \[P(|X|>0)\leq \sum\limits_{n=1}^{\infty}P(|X|\geq \frac{1}{n})=0\]
+        \item[$(\Leftarrow)$:] Пусть $X=0$ почти наверное,\ $X\geq 0 \Rightarrow EX\geq 0$. Рассмотрим 
+        \[EX_n\to EX,\ 0\leq X_n\nearrow X,\ X_n=2^{-n}[2^nX]\wedge n\]
+        Заметим, что $\{X_n\in [0,2^{-n})\}\subset \{X_n=0\}$
+        \[EX_n=\sum\limits_{k=0}^{n2^n}k2^{-n}P(k2^{-n}\leq X\leq (k+1)2^{-n})=0\]
+        Значит $\forall n\in \N: EX_n=0 \Rightarrow EX=0$.
+    \end{itemize}
+\end{proof}
+\begin{consequense}
+    Если $X=Y$ почти наверное и $X\in \mathcal{L}^1$, то $Y\in \mathcal{L}^1$ и $EX=EY$.
+\end{consequense}
+\begin{proof}
+    $Y=X+Y-X,\ X=Y$ почти наверное $\Rightarrow Y-X=0$ почти наверное. Отсюда существует
+    \[EY=EX+E(Y-X)=EX\]
+\end{proof}
+\begin{statement}
+    Отношение $X\sim Y \Leftrightarrow X=Y$ почти наверное - отношение эквивалентности.
+\end{statement}
+\begin{proof}\tab
+    \begin{enumerate}
+        \item $P(X=X)=1 \Rightarrow X\sim X$.
+        \item $X\sim Y \Rightarrow P(X\neq Y)=0$ и так как $\{X\neq Y\}=\{Y\neq X\}$, то $P(Y\neq X)=0\\
+        \Rightarrow Y\sim X$.
+        \item $X\sim Y$ и $Y\sim Z \Rightarrow P(X\neq Y)=0$ и $P(Y\neq Z)=0$. Заметим, что если $X\neq Z$, то либо $X\neq Y$, либо $Y\neq Z$, то есть 
+        \[\{X\neq Z\}\subset \{X\neq Y\}\cup \{Y\neq Z\}\]
+        Отсюда
+        \[P(X\neq Z)\leq P(X\neq Y)+P(Y\neq Z)=0+0=0\]
+        значит $X\sim Z$.
+    \end{enumerate}
+\end{proof}
+\begin{definition}
+    Определим пространство $L^p$ как совокупность классов эквивалентности величин из $\mathcal{L}^p$.
+\end{definition}
+\begin{statement}
+    Если $p\geq 1$, то $L^p$ - нормированное пространство, причем\\
+    $\forall X\in L^p:$
+    \[\|X\|=(E|X|^p)^{\frac{1}{p}}\]
+\end{statement}
+\begin{statement}
+    $L^2$ является гильбертовым пространством, причем
+    \[(X,Y)=E(XY),\ \ \|X\|_2=(EX^2)^{\frac{1}{2}}\]
+    то есть 
+    \[\rho(X,Y)=\|X-Y\|_2\]
+    по этой норме $L_2$ - полно.
+\end{statement}
+\begin{lemma} (Неравенство Коши-Буняковского-Шварца)\\
+    Пусть $H$ - гильбертово пространство. Тогда $\forall X,Y\in H:$
+    \[|(X,Y)|\leq \|X\|\cdot \|Y\|\]
+\end{lemma}
+\begin{proof}
+    Для $t\in \R$ рассмотрим 
+    \[(tX+Y, tX+Y)=t^2(X,X)+2(X,Y)t+(Y,Y)\geq 0\]
+    отсюда
+    \[D=(X,Y)^2-(X,X)(Y,Y)\leq 0\]
+\end{proof}
+\begin{definition}
+    Пусть $X,Y\in L^2,\ \var{X}\neq 0,\ \var{Y}\neq 0$. Коэффициентом корреляции Пирсона называется
+    \[\rho(X,Y)=\frac{\cov{(X,Y)}}{\sqrt{\var{X}\cdot \var{Y}}}\]
+    \[\cov{(X,Y)}=E((E-EX)(Y-EY))\]
+    отсюда, по неравенству КБШ: $\rho(X,Y)\leq 1$
+\end{definition}
+\begin{exercise}
+    $|\rho(X,Y)|=1 \Leftrightarrow X$ и $Y$ - линено зависимы.
+\end{exercise}
+\begin{comm}
+    Далее равенство случайных величин всегда подразумеваем как равенство почти наверное.
+\end{comm}
 \end{document}
