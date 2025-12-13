@@ -30,14 +30,13 @@
 \begin{definition}
     Множество $\mathcal{A}\in 2^{\Omega}$ такое, что $\mathcal{A}\ne \emptyset$ называется алгеброй, если
     \begin{enumerate}
-        \item $\Omega \in \mathcal{F}$
+        \item $\Omega \in \mathcal{A}$
         \item $A\in \mathcal{A} \Rightarrow \bar{A}=\Omega\setminus A\in \mathcal{A}$
         \item $A,B\in \mathcal{A} \Rightarrow A\cup B\in \mathcal{A}$
     \end{enumerate}
 \end{definition}
 \begin{statement} (Следствия из определения алгебры)
     \begin{enumerate}
-        \item $\Omega\in \mathcal{A}$, так как для непустого $A\in \mathcal{A}: \bar{A}\in \mathcal{A} \Rightarrow A\cup\bar{A}=\Omega\in \mathcal{A}$
         \item $\emptyset\in \mathcal{A}$, так как $\Omega\in \mathcal{A} \Rightarrow \bar{\Omega}=\emptyset\in \mathcal{A}$
         \item $A_1,\dots,A_n \in \mathcal{A} \Rightarrow \bigcup\limits_{i=1}^n A_i\in \mathcal{A}$
         \item $A\cap B\in \mathcal{A}$, если $A,B\in \mathcal{A}$, так как $A\cap B=\overline{\overline{A}\cup\overline{B}}$
@@ -63,16 +62,13 @@
 \begin{definition}
     Мерой на системе множеств $U$ называется функция\\ 
     $\mu: U\to [0,+\infty]$ такая, что
-    \begin{enumerate}
-        \item $\forall n: A_n\in U$
-        \item \[\bigcup\limits_{n=1}^{\infty}A_n\in U\]
-        \item $\forall i\ne j: A_i\cap A_j=\emptyset$
-        \item Выполнено свойство счетной аддитивности (такая мера называется счетно-аддитивной):
+        $\forall i\ne j: A_i\cap A_j=\emptyset$:
+        \[\bigcup\limits_{n=1}^{\infty}A_n\in U\]
+        выполнено свойство счетной аддитивности:
         \[\mu\left(\ \bigcup\limits_{n=1}^{\infty}A_n\ \right)=\sum_{n=1}^{\infty}\mu(A_n)\]
-    \end{enumerate}
 \end{definition}
 \begin{comm}
-    Если $U$ - $\sigma$-алгебра, то условие
+    Если $U$ --- $\sigma$-алгебра, то условие
     \[\bigcup\limits_{n=1}^{\infty}A_n\in U\]
     можно упустить.
 \end{comm}
@@ -85,14 +81,14 @@
     Упражнение: доказать, что $\delta_x(.)$ является мерой на $2^S$
 \end{example}
 \begin{definition}
-    Мера $P$ на пространтсве $(\Omega, \mathcal{F})$ такая, что $P(\Omega)=1$ называется вероятностью.
+    Мера $P$ на пространстве $(\Omega, \mathcal{F})$ такая, что $P(\Omega)=1$ называется вероятностью.
 \end{definition}
 \subsection{Дискретные вероятностные пространства}
 \begin{definition}
     Пусть $\Omega=\{\omega_n\}_{n\in J}$ не более чем счетно, $\mathcal{F}=2^{\Omega}$, причем
-    \[P_n=P(\{\omega_n\})\geq 0,\ \sum_{n\in J} P_n =1\]
+    \[p_n=P(\{\omega_n\})\geq 0,\ \sum_{n\in J} p_n =1\]
     Пусть $A\subset \Omega$, определим вероятность так:
-    \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}P_k\]
+    \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}p_k\]
     такое вероятностное пространство называется дискретным.
 \end{definition}
 \begin{exercise}
@@ -100,8 +96,8 @@
 \end{exercise}
 %ТУТ ВСТАВКА КАКАЯ-ТО
 \begin{definition} (Классическое определение вероятности)\\
-    Пусть $|\Omega|=N<\infty$ и положим $P_k=P(\{\omega_k\})=\frac{1}{N}$. Тогда
-    \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}P_k=\frac{|A|}{N}=\frac{|A|}{|\Omega|}\]
+    Пусть $|\Omega|=N<\infty$ и положим $p_k=P(\{\omega_k\})=\frac{1}{N}$. Тогда
+    \[P(A)=\sum\limits_{k: \omega_k\in A}^{n}p_k=\frac{|A|}{N}=\frac{|A|}{|\Omega|}\]
 \end{definition}
 %Тут были примеры
 \subsection{Пи-системы и лямбда-системы}
@@ -112,7 +108,7 @@
     Сисмтема $M$ подмножеств множества $S$ называется $\lambda$-системой, если
     \begin{enumerate}
         \item $S\in M$
-        \item $A,B\in M \Rightarrow B\setminus A\in M$
+        \item $A,B\in M$ и $A\subset B \Rightarrow B\setminus A\in M$
         \item $A_1, A_2, \dots \in M$ и $A_n \nearrow A$, то $A\in M$.\\
         ($A_n \nearrow A \Leftrightarrow A_n\subset A_{n+1},\ \forall n\in \N$ и $A=\bigcup\limits_{n=1}^{\infty}A_n$)
     \end{enumerate}
@@ -141,6 +137,7 @@
 \begin{theorem}\label{th1}
     Пусть M - $\pi$-система, $D$ - $\lambda$-система и $M\subset D$. Тогда
     \[\sigma\{M\}=\lambda\{M\}\subset D\]
+    где $\lambda\{M\}$ --- наименьшая $\lambda$-система, содержащая $M$.
 \end{theorem}
 \section{Лекция 2}
 \subsection{Простейшие свойства конечно-аддитивной вероятностной меры на алгебре}
@@ -167,7 +164,7 @@
         \item \textit{будет позже}
     \end{enumerate}
 \end{proof}
-\subsection{Непрерывность сверху и снизу}
+\subsection{Непрерывность вероятностной меры}
 \begin{definition}
     Конечная неотрицательная функция $\mu$, заданная на алгебре $\mathcal{A}$, называется непрерывной в $\emptyset$, если $\forall A_n$:
     \[A_n \downarrow \emptyset\ (A_{n+1}\subset A_n,\ \forall n\in \N: \bigcap\limits_{n=1}^{\infty}A_n=\emptyset) \Rightarrow \mu(A_n)\to 0\]
@@ -182,12 +179,12 @@
     \end{enumerate}
 \end{definition}
 \begin{lemma}
-    Пусть $\mu$ - конечная неотрицательная конечно-аддитивная функция на алгебре $\mathcal{A}$. Тогда $\mu$ непрерывно сверху и снизу на любом $A\in \mathcal{A}$.
+    Пусть $\mu$ - конечная неотрицательная конечно-аддитивная функция на алгебре $\mathcal{A}$, причем $\mu$ непрерывна в $\emptyset$. Тогда $\mu$ непрерывно сверху и снизу на любом $A\in \mathcal{A}$.
 \end{lemma}
 \begin{proof}
     Докажем непрерывность сверху. Рассмотрим последовательность $A_n \downarrow A \Rightarrow A_n\setminus A \downarrow \emptyset \Rightarrow \mu(A_n\setminus A)=\mu(A_n)-\mu(A)\to 0$. Аналогично, рассмотрим $A_n\uparrow A \Rightarrow A\setminus A_n \downarrow \emptyset \Rightarrow \mu(A\setminus A_n)=\mu(A)-\mu(A_n)\to 0$.
 \end{proof}
-\begin{theorem}
+\begin{theorem} (Критерий счетной-аддитивности)\\
     Пусть $\mu$ - конечная неотрицательная функция на алгебре $\mathcal{A}$. Тогда $\mu$ является счетно-аддитивной на $\mathcal{A}$ тогда и только тогда, когда
     \begin{enumerate}
         \item $\mu$ является конечно-аддитивной.
@@ -200,31 +197,36 @@
         Пусть $\mu$ - счетно-аддитивная на $\mathcal{A}$. Рассмотрим $A_n \downarrow \emptyset,\ n\to \infty$ и введем $B_n=A_n\setminus A_{n+1},\ n\in \N$. Эти слои не пересекаются и $\bigcup\limits_{n=N}^{\infty}B_n=A_N$. Применим счетную аддитивность: 
         \[\mu(A_N)=\sum\limits_{n=N}^{\infty}\mu(B_n)<\infty\]
         Этот ряд сходится, значит последовательность (остаточных рядов)
-        \[S_N=\sum\limits_{n=N}^{\infty}\mu(B_n)\to 0\]
-        \item[$(\Leftarrow)$:] (\textit{тут пока что лажа})
-        %\[\mu\left(\bigcup\limits_{n=1}^{\infty}A_n\right)=\sum\limits_{n=1}^{\infty}\mu(A_n),\ A_i\cap A_j\ne \emptyset\]
-        Пусть $A_i\ne A_j,\ i\ne j$. Введем $C_n=\bigcup\limits_{k=n}^{\infty}A_k \Rightarrow C_n \downarrow \emptyset$. При этом \\
-        $A_1=C_1\cup\dots\cup C_{n-1}\cup C_n$, причем $A_1\in \mathcal{A}$ и $C_1,\dots,C_{n-1}\in \mathcal{A}$. Таким образом, $C_n\in \mathcal{A},\ \forall n\in \N$. 
-        \[\bigcup\limits_{k=1}^{\infty}A_k=A_1\cup\dots\cup A_{n-1}\cup C_n\]
-        Отсюда
-        \[\mu\left(\bigcup\limits_{k=1}^{\infty}A_k\right)=\mu(A_1)+ \dots +\mu(A_{n-1})+\mu(C_n)=\sum\limits_{k=1}^{n-1}\mu(A_k)+\mu(C_n)\]
-        при $n\to \infty,\ \mu(C_n)\to 0$, получим 
-        \[\mu\left(\bigcup\limits_{k=1}^{\infty}A_k\right)=\sum\limits_{k=1}^{\infty}\mu(A_k)\]
+        \[S_N=\sum\limits_{n=N}^{\infty}\mu(B_n)\to 0,\ N\to \infty\]
+        \item[$(\Leftarrow)$:] 
+        Рассмотрим $A\in \mathcal{A}$, причем
+        \[A=\bigcup\limits_{k=1}^{\infty}A_k\]
+        где $A_k\in \mathcal{A}$ и $A_i\neq A_j$ при $i\neq j$. Введем $C_n$:
+        \[C_n=\bigcup\limits_{k=n}^{\infty}A_n,\ \ C_n\downarrow \emptyset\]
+        Заметим, что
+        \[A=\bigcup\limits_{k=1}^{\infty}A_k=A_1\cup \dots\cup A_{n-1}\cup C_n\]
+        причем $A_1\cup \dots\cup A_{n-1}\in \mathcal{A}$, поскольку $\mathcal{A}$ --- алгебра и $A\in \mathcal{A}$ по условию. Тогда $C_n\in \mathcal{A}$.
+        \[\mu(A)=\mu\left(\ \bigcup\limits_{k=1}^{\infty}A_k\right)=\mu(A_1)+ \dots +\mu(A_{n-1})+\mu(C_n)=\sum\limits_{k=1}^{n-1}A_k+\mu(C_n)\]
+        Поскольку $C_n\downarrow \emptyset$, то $\mu(C_n)\to 0$ при $n\to \infty$. Тогда, после предельного перехода, получим
+        \[\mu\left(\ \bigcup\limits_{k=1}^{\infty}A_k\right)=\sum\limits_{k=1}^{\infty}A_k\]
     \end{itemize}
 \end{proof}
 \begin{theorem}
     Пусть $P, Q$ - меры на $(\Omega, \mathcal{F})$ и $P=Q$ на алгебре $\mathcal{A}$. Тогда $P=Q$ на алгебре $\sigma\{\mathcal{A}\}$.
 \end{theorem}
 \begin{proof}
-    Воспользуемся \hyperref[th1]{теоремой из прошлой лекции}. Алгебра является $\pi$-системой, рассмотрим $D=\{B\in \mathcal{F}: P(B)=Q(B)\},\ \mathcal{A}\subset D$. Проверим, что $D$ является $\lambda$-системой:
+    Сведем к \hyperref[th1]{теореме из прошлой лекции}. Алгебра $\mathcal{A}$\  в частности является $\pi$-системой, рассмотрим 
+    \[D=\{B\in \mathcal{F}: P(B)=Q(B)\}\] 
+    $\mathcal{A}\subset D$. Проверим, что $D$ является $\lambda$-системой:
     \begin{enumerate}
         \item $P(\Omega)=Q(\Omega)=1 \Rightarrow \Omega\in D$
         \item $P(B\setminus A)=P(B)-P(A),\ Q(B\setminus A)=Q(B)-Q(A)$, причем\\
         $P(A)=Q(A),\ P(B)=Q(B) \Rightarrow P(B\setminus A)=Q(B\setminus A) \Rightarrow B\setminus A\in D$.
+        \item
         $A_n\in D,\ A_n \uparrow A=\bigcup\limits_{n=1}^{\infty}A_n$. По свойству непрерывности $P(A_n)\to P(A),\\
         Q(A_n)\to Q(A) \Rightarrow A\in D$.
-        Значит $\sigma\{\mathcal{A}\}\subset D$.
     \end{enumerate}
+    Значит $\sigma\{\mathcal{A}\}\subset D$, что и является утверждением теоремы.
 \end{proof}
 \subsection{Условные вероятности}
 \begin{definition}
@@ -233,7 +235,7 @@
     \[P(A|B)=\frac{P(A\cap B)}{P(B)}\]
 \end{definition}
 \begin{definition} (Условная вероятность в классическом определении)\\
-    Пусть $(\Omega, \mathcal{F}, P)$ вероятностьное пространство, $|\Omega|=N<\infty,\ P(\{\omega_k\})=\frac{1}{N}$ и $P(B)=\frac{|B|}{N}$. Тогда
+    Пусть $(\Omega, \mathcal{F}, P)$ вероятностное пространство, $|\Omega|=N<\infty,\ P(\{\omega_k\})=\frac{1}{N}$ и $P(B)=\frac{|B|}{N}$. Тогда
     \[P(A|B)=\frac{|A\cap B|}{|B|}=\frac{\frac{1}{N}\cdot |A\cap B|}{\frac{1}{N}\cdot |B|}=\frac{P(A\cap B)}{P(B)}\]
 \end{definition}
 \begin{example}
@@ -246,7 +248,9 @@
     \[P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{\frac{2}{8}}{\frac{3}{8}}=\frac{2}{3}\]
 \end{example}
 \begin{theorem} (Формула полной вероятности)\\
-    Пусть $\Omega=B_1\cup B_2\cup...\ ,\ B_k\in \mathcal{F},\ P(B_k)>0$. Тогда определены $P(A|B_k)$, причем для $A\in \mathcal{F}$ верна формула
+    Пусть для всех $k: B_k\in \mathcal{F},\ P(B_k)>0$ и пространство разбивается в их объединение: 
+    \[\Omega=B_1\sqcup B_2\sqcup B_3 \sqcup \dots\]
+    Тогда определены $P(A|B_k)$, причем для $A\in \mathcal{F}$ верна формула
     \[P(A)=\sum\limits_{k}P(A|B_k)P(B_k)\]
 \end{theorem}
 \begin{proof}
@@ -255,13 +259,13 @@
     отсюда
     \[P(A)=\sum\limits_{k}P(A|B_k)P(B_k)\]
 \end{proof}
-\begin{theorem} (Формула Байеса)\\
+\begin{consequense} (Формула Байеса)\\
     Пусть $P(A)\ne 0$, тогда верна формула
-    \[P(B_k|A)=\frac{P(A|B_k)P(B_k)}{\sum\limits_{k}P(A|B_n)P(B_n)}\]
-\end{theorem}
+    \[P(B_n|A)=\frac{P(A|B_n)P(B_n)}{\sum\limits_{k}P(A|B_k)P(B_k)}\]
+\end{consequense}
 \begin{proof}
     По определению условной вероятности и формуле полной вероятности, получим
-    \[P(B_k|A)=\frac{P(B_k\cap A)}{P(A)}=\frac{P(A|B_k)P(B_k)}{\sum\limits_{k}P(A|B_n)P(B_n)}\]
+    \[P(B_n|A)=\frac{P(B_n\cap A)}{P(A)}=\frac{P(A|B_n)P(B_n)}{\sum\limits_{k}P(A|B_k)P(B_k)}\]
 \end{proof}
 \section{Лекция 3}
 \subsection{Независимые события}
@@ -723,7 +727,7 @@
 \end{proof}
 \noindent В доказательстве мы воспользовались теоремой
 \begin{theorem} (Теорема Ломницкого-Улама)\\
-    Пусть $(S_t,\mathcal{B}_t,Q_t)$ - семейтво вероятностных пространств. Тогда на некотором вероятностном пространтсве $(\Omega, \mathcal{F}, P)$ можно построить семейство независимых случайных элементов $X_t: \Omega\to S_t,\ X_t\in \mathcal{F}|\mathcal{B}_t$, причем $P_{X_t}=Q_t,\ t\in T$. Это означает, что всегда можно построить семейство независимых случайных элементов, имеющих заданное распределение.
+    Пусть $(S_t,\mathcal{B}_t,Q_t)$ - семейтво вероятностных пространств. Тогда на некотором вероятностном пространстве $(\Omega, \mathcal{F}, P)$ можно построить семейство независимых случайных элементов $X_t: \Omega\to S_t,\ X_t\in \mathcal{F}|\mathcal{B}_t$, причем $P_{X_t}=Q_t,\ t\in T$. Это означает, что всегда можно построить семейство независимых случайных элементов, имеющих заданное распределение.
 \end{theorem}
 \subsection{Расширенные случайные величины}
 \begin{definition}
