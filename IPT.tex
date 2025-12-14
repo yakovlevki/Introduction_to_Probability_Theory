@@ -55,6 +55,22 @@
 \begin{comm}
     $\mathcal{F}$ - $\sigma$-алгебра $\Rightarrow \mathcal{F}$ - алгебра.
 \end{comm}
+\begin{example} (Алгебры не являющейся $\sigma$-алгеброй)\\
+    Возьмем $\Omega = \R$. Скажем, что множество $A\in \mathcal{A}$, если для некоторого $n$ оно является конечным объединеним полуинтрвалов $(a_i, b_i]$
+    \[A=\bigcup\limits_{i=1}^{n}(a_i,b_i]\]
+    где $-\infty \leq a_1\leq b_1\leq a_2\leq b_2 \leq ... \leq a_n\leq b_n \leq +\infty$.\\
+    \newpage
+    Покажем, что $\mathcal{A}$ является алгеброй:
+    \begin{enumerate}
+        \item $(-\infty, +\infty]=\R\in \mathcal{A}$
+        \item Дополнение к полуинтервалу --- объединение двух полуинтервалов.
+        \item По определению
+    \end{enumerate} 
+    Покажем, что $\mathcal{A}$ не является $\sigma$-алгеброй.
+    Рассмотрим последовательность множеств из $\mathcal{A}$:
+    $A_1=(0,\frac{1}{2}],\ A_2=(\frac{1}{2}, \frac{3}{4}],\ A_3=(\frac{3}{4},\frac{7}{8}],\dots, A_n=(1-\frac{1}{2^{n-1}}, 1-\frac{1}{2^n}],\dots$
+    \[\bigcup\limits_{i=1}^{\infty}A_i=(0,1)\not\in \mathcal{A}\]
+\end{example}
 \begin{comm}
     Наименьшая по включению $\sigma$-алгебра, содержащая $M$, обозначается $\sigma\{M\}=\bigcap\limits_{\alpha}g_{\alpha}$, где $g_{\alpha}$ - $\sigma$-алгебра, содержащая все элементы $M$.
 \end{comm}
@@ -133,9 +149,8 @@
         \end{enumerate}
     \end{itemize}
 \end{proof}
-\newpage
 \begin{theorem}\label{th1}
-    Пусть M - $\pi$-система, $D$ - $\lambda$-система и $M\subset D$. Тогда
+    Пусть M --- $\pi$-система, $D$ --- $\lambda$-система и $M\subset D$. Тогда
     \[\sigma\{M\}=\lambda\{M\}\subset D\]
     где $\lambda\{M\}$ --- наименьшая $\lambda$-система, содержащая $M$.
 \end{theorem}
@@ -288,7 +303,7 @@
     Пусть $A_1,\dots,A_n$ - события. Они называются попарно независимыми, если $\forall i,j\in \{1,\dots,n\},\ i\ne j:$
     \[P(A_i\cap A_j)=P(A_i)P(A_j)\]
 \end{definition}
-\begin{example}
+\begin{example} (Попарной независимости событий недостаточно для их независимости в совокупности)\\
     Рассмотрим $(\Omega, \mathcal{F}, P)$ в рамках классического определения: 
     \[\Omega=\{\omega_1,\omega_2,\omega_3,\omega_4\},\ A_1=\{\omega_1, \omega_2\},\ A_2=\{\omega_1,\omega_3\},\ A_3=\{\omega_1,\omega_4\},\ A_i\cap A_j=\{\omega_1\}\] 
     Тогда 
@@ -313,7 +328,7 @@
             P(B_{i_1}\cap \dots \cap B_{i_k})=P(A_{i_1}\cap \dots\cap \overline{A_{i_m}}\cap \dots \cap A_{i_k}) \overset{(1)}{=}\\
             \overset{(1)}{=} P((A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})\setminus(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_m}\cap A_{i_{m+1}}\cap \dots\cap A_{i_k}))\overset{(2)}{=}\\
             \overset{(2)}{=} P(A_{i_1}\cap \dots \cap A_{i_{m-1}}\cap A_{i_{m+i}}\cap A_{i_k})-P(A_{i_1}\cap \dots \cap A_{i_k})=\\\
-            =(P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k}))-(P(A_{i_1})\dots P(A_{i_k}))\overset{(3)}{=}\\
+            =P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k})-P(A_{i_1})\dots P(A_{i_k})\overset{(3)}{=}\\
             \overset{(3)}{=} P(A_{i_1})\dots P(A_{i_{m-1}})P(A_{i_{m+1}})\dots P(A_{i_k})(1-P(A_{i_m}))=\\=P(B_{i_1})\dots P(B_{i_m})\dots P(B_{i_k})
         \end{multline*}
         (1): $A\cap \overline{C}=A\setminus (A\cap C)$\\
@@ -341,19 +356,20 @@
     значит
     \[\prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)=\frac{\phi(n)}{n}\ \Rightarrow\ \phi(n)=n\cdot \prod\limits_{i=1}^{m}\left(1-\frac{1}{p_i}\right)\]
 \end{proof}
+\subsection{Независимые системы событий}
 \begin{definition} %дописать эквивалентность
     Системы событий $\mathcal{G}_1,\dots,\mathcal{G}_n$ называются независимыми, если $\forall 1\leq i_1 < \dots <i_k\leq n$ и $\forall A_i\in \mathcal{G}_i: A_{i_1},\dots,A_{i_k}$ независимы.
 \end{definition}
 \begin{definition}
-    Пусть все $\mathcal{G}_k$ содержат $\Omega$ (например $\mathcal{G}_k$ - алгебры), то это определение равносильно следующему: 
-    \[P(A_1\cap \dots\cap A_n)=P(A_1)\dots P(A_n),\ \forall A_i\in \mathcal{G}_i\]
+    Пусть все $\mathcal{G}_k$ содержат $\Omega$ (например $\mathcal{G}_k$ - алгебры), то они независимы, если $\forall A_i\in \mathcal{G}_i$:
+    \[P(A_1\cap \dots\cap A_n)=P(A_1)\dots P(A_n)\]
 \end{definition}
 \begin{statement}
     Если все $\mathcal{G}_k$ содержат $\Omega$, то эти определения эквивалентны.
 \end{statement}
 \begin{proof}\tab
     \begin{enumerate}
-        \item Первое определние влечет второе, поскольку в качестве $i_1,\dots,i_k$ можно взять $1,\dots,n$.
+        \item Первое определение влечет второе, поскольку в качестве $i_1,\dots,i_k$ можно взять $1,\dots,n$.
         \item Докажем, что второе определение влечет первое:
         Рассмотрим произвольный набор событий $A_{i_1}, \dots, A_{i_k}$ и определим события $B_1,\dots,B_n$:
         \[B_m=\begin{cases}
@@ -407,8 +423,11 @@
         а это означает, что $B\in D_1$.
     \end{enumerate}
     Значит $D_1$ - это $\lambda$-система. Тогда, поскольку $M_1\subset D_1$, то $\sigma\{M_1\}\subset D_1$.\\
-    Аналогичными рассуждениями, получим, что $\sigma\{M_2\}\subset D_2, \dots, \sigma\{M_n\}\subset D_n$. Поскольку $D_1,\dots, D_n$ независимы, то $\sigma\{M_1\}, \dots, \sigma\{M_n\}$ независимымы.
+    Далее определим $D_2$ --- это будут все события $B_2$ такие, что
+    \[P(B_1\cap B_2\cap \dots \cap B_n)=P(B_1)P(B_2)\dots P(B_n)\]
+    для произвольных $B_1\in \sigma\{M_1\},\ B_3\in M_3,\ \dots,\ B_n\in M_n$. Аналогично, $D_2$ --- $\lambda$-система, причем $D_2$ независима с $\sigma\{M_1\}$ и $\sigma\{M_2\}\subset D_2$ следовательно $\sigma\{M_1\}$ и $\sigma\{M_2\}$ независимы. Аналогично рассуждаем про $D_3,\dots,D_n$ и получаем, что $\sigma\{M_1\},\dots,\sigma\{M_n\}$ независимы.
 \end{proof}
+\subsection{Лемма Бореля-Кантелли}
 \begin{lemma} (Лемма Бореля-Кантелли)
     \begin{enumerate}
         \item Если события $A_1, A_2, \dots$ таковы, что
@@ -433,21 +452,23 @@
             =P\left(\ \bigcup\limits_{n=1}^{\infty}\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)\right)\leq \sum\limits_{n=1}^{\infty}P\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)
         \end{multline*}
         Покажем, что $\forall n\in \N$:
-        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)\]
+        \[P\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)=0\]
         Поскольку вероятностная мера непрерывна, то 
-        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)=\lim\limits_{N\to\infty}P\left(\ \bigcup\limits_{k=n}^{N}\overline{A_k}\right)\]
+        \[P\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)=\lim\limits_{N\to\infty}P\left(\ \bigcap\limits_{k=n}^{N}\overline{A_k}\right)\]
         $A_1,\dots,A_n$ независимы $\Rightarrow \overline{A_1}, \dots, \overline{A_n}$ независимы по лемме. Поэтому
         \begin{multline*}
-            P\left(\ \bigcup\limits_{k=n}^{N}\overline{A_k}\right)=\prod\limits_{k=n}^{N}P(\overline{A_k})=\prod\limits_{k=n}^{N}(1-P(A_k))\overset{(1)}{\leq}\\
+            P\left(\ \bigcap\limits_{k=n}^{N}\overline{A_k}\right)=\prod\limits_{k=n}^{N}P(\overline{A_k})=\prod\limits_{k=n}^{N}(1-P(A_k))\overset{(1)}{\leq}\\
             \overset{(1)}{\leq} \prod\limits_{k=n}^{N} e^{-P(A_k)}=\text{exp}{\left(-\sum\limits_{k=n}^{N}P(A_k)\right)}
         \end{multline*}
         (1): Используем неравенство: $\forall x\in \R,\ 1-x\leq e^{-x}$ (Можно доказать, разложив экспоненту в степенной ряд).\\
         При $N\to \infty$ получим
-        \[P\left(\ \bigcup\limits_{k=n}^{\infty}\overline{A_k}\right)\leq\text{exp}{\left(-\sum\limits_{k=n}^{\infty}P(A_k)\right)}\to 0\]
+        \[P\left(\ \bigcap\limits_{k=n}^{\infty}\overline{A_k}\right)\leq\text{exp}{\left(-\sum\limits_{k=n}^{\infty}P(A_k)\right)}\to 0\]
     \end{enumerate}
 \end{proof}
 \begin{lemma} (Лемма о групировке)\\
-    Пусть имеется семейтво $\mathcal{A}_t,\ t\in T$ независимых $\sigma$-алгебр. Возьмем $I_1,I_2,\dots\subset T: I_k\cap I_m=\emptyset,\ \forall k\ne m$ и для $I\subset T$ введем $\sigma\{I\}=\sigma\{\mathcal{A}_t,\ t\in I\}$. Тогда $\sigma\{I_1\}, \sigma\{I_2\}, \dots$ - независимые $\sigma$-алгербы.
+    Пусть имеется семейство $\mathcal{A}_t,\ t\in T$ независимых $\sigma$-алгебр.\\
+    Возьмем $I_1,I_2,\dots\subset T: I_k\cap I_m=\emptyset,\ \forall k\ne m$ и для $I\subset T$ введем\\
+    $\sigma\{I\}=\sigma\{\mathcal{A}_t,\ t\in I\}$. Тогда $\sigma\{I_1\}, \sigma\{I_2\}, \dots$ - независимые $\sigma$-алгербы.
 \end{lemma}
 \section{Лекция 4}
 \subsection{Функция распределения и плотность}
@@ -481,20 +502,20 @@
     Это задает взаимно-однозначное соответствие между вероятностными мерами и функциями распределения.
 \end{theorem}
 \begin{definition}
-    Пусть $p(x)$ вещественная кусочно непрерывная функция. Если $\forall x\in \R: p(x)\geq 0$ и интеграл Римана
+    Пусть $p(x)$ вещественная кусочно-непрерывная функция. Если $\forall x\in \R: p(x)\geq 0$ и интеграл Римана
     \[\int\limits_{\R}p(u)\ du=1\]
     то такая $p(x)$ называется плотностью.
 \end{definition}
 \begin{statement}
-    \[F(x)=\int\limits_{-\infty}^{x}p(u)du\]
-    является функция распределения.\\
+    \[F(x)=\int\limits_{-\infty}^{x}p(u)\ du\]
+    является функцией распределения.\\
     (для нее выполнены свойства $(1)-(4)$)
 \end{statement}
 \begin{example}
     Равномерное распределение на $[a,b]\subset \R$
     \[p(x)=\begin{cases}
-        \frac{1}{b-a},\ x\in [a,b],\\
-        0,\ \ \ \ x\not\in [a,b].
+        \frac{1}{b-a},& x\in [a,b],\\
+        0,&x\not\in [a,b].
     \end{cases}\]
     \[
     \begin{tikzpicture}[>=stealth, scale=1.2]
@@ -517,8 +538,8 @@
 \begin{example}
     Экспоненциальное распределение с параметром $\lambda>0$
     \[p(x)=\begin{cases}
-        \lambda e^{-\lambda x},\ x\geq 0,\\
-        0,\ \ \ \ \ \ \ x<0.
+        \lambda e^{-\lambda x},& x\geq 0,\\
+        0,& x<0.
     \end{cases}\]
     \[
     \begin{tikzpicture}[>=stealth, scale=1.3]
@@ -571,11 +592,11 @@
     Тогда $f\in \mathcal{F}|\mathcal{B}$.
 \end{consequense}
 \begin{consequense}
-    Пусть $(V, \tau)$ и $(S, \nu)$ - топологические пространства. Тогда $f: V\to S$ непрерывна $(f^{-1}(\nu)\subset \tau)$. Тогда $f\in \mathcal{B}(V)|\mathcal{B}(S)$
+    Пусть $(V, \tau)$ и $(S, \nu)$ - топологические пространства. Если $f: V\to S$ непрерывна $(f^{-1}(\nu)\subset \tau)$, то $f\in \mathcal{B}(V)|\mathcal{B}(S)$
 \end{consequense}
 \subsection{Распределение случайного элемента}
 \begin{definition}
-    Рассмотрим вероятностыне пространства $(\Omega, \mathcal{F})$ и $(S, \mathcal{B})$. Пусть $X:\Omega \to S,\ X\in \mathcal{F}|\mathcal{B}$. Распределением случайного элемента $X$ называется вероятностная мера $P_X$ на $(S,\mathcal{B})$ такая, что
+    Рассмотрим вероятностные пространства $(\Omega, \mathcal{F})$ и $(S, \mathcal{B})$. Пусть $X:\Omega \to S,\ X\in \mathcal{F}|\mathcal{B}$. Распределением случайного элемента $X$ называется вероятностная мера $P_X$ на $(S,\mathcal{B})$ такая, что
     \[P_X(B)=P(X^{-1}(B))\]
     для любого $B\in \mathcal{B}$.
 \end{definition}
@@ -590,13 +611,18 @@
     $\sigma\{X_i\}=\{X^{-1}_i(B),\ B\in \mathcal{B}\}$, что означает
     \[P(X_1\in B_1, \dots, X_n\in B_n)=\prod\limits_{k=1}^{n}P(X_k\in B_k)\]
 \end{definition}
+\begin{definition}
+    Случайная величина $X$ называется дискретной, если она принимает не более чем счетное число значений.
+\end{definition}
 \begin{definition} (Биномиальное распределение)\\
-    $X \sim B_{\epsilon}(n,p)$, где $n\in \N,\ 0<P<1$, если
-    \[P(x=k)=C_n^k p^k (1-p)^{n-k},\ k=0,1,\dots,m\]
+    Дискретная случайная величина $X$ имеет биномиальное распределение:\\
+    $X \sim B(n,p)$, где $n\in \N,\ 0<p<1$, если
+    \[P(X=k)=C_n^k p^k (1-p)^{n-k},\ k=0,1,\dots,m\]
 \end{definition}
 \begin{definition} (Распределение Пуассона)\\
+    Дискретная случайная величина распределяется по Пуассону:\\
     $X\sim Pois(\lambda)$, если
-    \[P(x=k)=\frac{\lambda^k e^{-\lambda}}{k!},\ k\in \Z_+\]
+    \[P(X=k)=\frac{\lambda^k e^{-\lambda}}{k!},\ k\in \Z_+\]
 \end{definition}
 \begin{theorem} (Классическая теорема Пуассона)\\
     Если $n\cdot p(n)\to \lambda>0,\ n\to \infty$, то
@@ -616,7 +642,7 @@
     Значит, остается доказать, что
     \[\frac{n!}{n^k(n-k)!}\to 1\]
     Действительно
-    \[\frac{n!}{n^k (n-k)!}=\frac{(n-k+1)!}{n^k}\to 1\]
+    \[\frac{n!}{n^k (n-k)!}=\frac{n(n-1)(n-2)\dots(n-k+1)}{n^k}\to 1\]
     Объединив результаты, получим
     \[\frac{n!}{k!(n-k)!}\cdot p^k(n)(1-p(n))^{n-k}\to \frac{\lambda^k e^{-\lambda}}{k!}\]
 \end{proof}
@@ -624,7 +650,7 @@
 \section{Лекция 5}
 \subsection{Современная теорема Пуассона}
 \begin{theorem}
-    Пусть $X_1, \dots, X_n$ - независимые случайные элементы,\\
+    Пусть $X_1, \dots, X_n$ - независимые Бернуллиевские случайные элементы,
     $P(X_i=1)=p_i,\ P(X_i=0)=1-p_i,\ S_n=X_1+\dots+X_n,\ Y\sim Pois(\lambda)$, где $\lambda=p_1+\dots+p_n$. Тогда
     \[\sup\limits_{B\in \mathcal{B}(\R)}|P(S_n\in B)-P(Y\in B)|\leq \sum\limits_{k=1}^{n}p_k^2\]
     Для доказательства этой теоремы потребуются две леммы
@@ -637,8 +663,8 @@
     Сначала докажем, что $Y_1 + Y_2 \sim Pois(\lambda_1+\lambda_2)$ при условии, что $Y_1 \sim Pois(\lambda_1),\ Y_2 \sim Pois(\lambda_2)$.
     \begin{multline*}
         P(Y_1+Y_2=m)\overset{(1)}{=}\sum\limits_{i=0}^{m}P(Y_1+Y_2=m,\ Y_1=i)=\\
-        =\sum\limits_{i=0}^{m}P(Y_1=i,\ Y_2=m-i)=\sum\limits_{i=0}^{m}P(Y_1=i)P(Y_2=m-i)\overset{(2)}{=}\tab[2.5cm]\\
-        \tab[1.5cm]\overset{(2)}{=}\sum\limits_{i=0}^{m}\left(\frac{\lambda_1^i e^{-\lambda_1}}{i!}\cdot \frac{\lambda_2^{m-i}e^{-\lambda_2}}{(m-i)!}\right)=\frac{e^{-(\lambda_1+\lambda_2)}}{m!}\cdot \sum\limits_{i=0}^{m} \left(\frac{m!}{i! (m-i)!}\lambda_1^i \lambda_2^{m-i}=\right)=\\
+        =\sum\limits_{i=0}^{m}P(Y_1=i,\ Y_2=m-i)=\sum\limits_{i=0}^{m}P(Y_1=i)P(Y_2=m-i)\tab[2.5cm]\\
+        \tab[1.5cm]=\sum\limits_{i=0}^{m}\left(\frac{\lambda_1^i e^{-\lambda_1}}{i!}\cdot \frac{\lambda_2^{m-i}e^{-\lambda_2}}{(m-i)!}\right)\overset{(2)}{=}\frac{e^{-(\lambda_1+\lambda_2)}}{m!}\cdot \sum\limits_{i=0}^{m} \left(\frac{m!}{i! (m-i)!}\lambda_1^i \lambda_2^{m-i}=\right)=\\
         =\frac{e^{-(\lambda_1+\lambda_2)}}{m!}(\lambda_1+\lambda_2)^m
     \end{multline*}
     (1): По формуле полной вероятности\\
@@ -650,11 +676,12 @@
     \textit{Остается показать, что $Y_1+\dots+Y_{n-1}$ и $Y_n$ независимы}
 \end{proof}
 \begin{lemma}
-    Пусть $X, Y$ случайные величины. Тогда $\forall B\in \mathcal{B}$ выполнено:
+    Пусть $X, Y$ случайные величины. Тогда $\forall B\in \mathcal{B}(\R)$ выполнено:
     \[|P(X\in B)-P(Y\in B)|\leq P(X\neq Y)\]
 \end{lemma}
 \begin{proof}
-    Рассмотрим разбиение $\Omega$ на две части: $Y(\omega)\in B$ и $Y(\omega)\not\in B$. Тогда по формуле полной вероятности:
+    Рассмотрим разбиение $\Omega$ на четыре части:\\
+    $X(\omega)\in B$ и $Y(\omega)\in B$,\ $X(\omega)\in B$ и $Y(\omega)\not\in B$,\ $X(\omega)\not\in B$ и $Y(\omega)\in B$,\ $X(\omega)\not\in B$ и $Y(\omega)\not\in B$. Тогда по формуле полной вероятности:
     \begin{multline*}
         P(X\in B)-P(Y\in B)=P(X\in B,\ Y\in B)+\\
         +P(X\in B,\ Y\not\in B)-P(Y\in B,\ X\in B)-P(Y\in B, X\not\in B)\leq \\
@@ -665,7 +692,7 @@
 \end{proof}
 Теперь можно перейти к доказательству теоремы. Напомним ее условие
 \begin{theorem}
-    Пусть $X_1, \dots, X_n$ - независимые случайные элементы,\\
+    Пусть $X_1, \dots, X_n$ - независимые Бернуллиевские случайные элементы,
     $P(X_i=1)=p_i,\ P(X_i=0)=1-p_i,\ S_n=X_1+\dots+X_n,\ Y\sim Pois(\lambda)$, где $\lambda=p_1+\dots+p_n$. Тогда
     \[\sup\limits_{B\in \mathcal{B}(\R)}|P(S_n\in B)-P(Y\in B)|\leq \sum\limits_{k=1}^{n}p_k^2\]
 \end{theorem}
@@ -727,7 +754,7 @@
 \end{proof}
 \noindent В доказательстве мы воспользовались теоремой
 \begin{theorem} (Теорема Ломницкого-Улама)\\
-    Пусть $(S_t,\mathcal{B}_t,Q_t)$ - семейтво вероятностных пространств. Тогда на некотором вероятностном пространстве $(\Omega, \mathcal{F}, P)$ можно построить семейство независимых случайных элементов $X_t: \Omega\to S_t,\ X_t\in \mathcal{F}|\mathcal{B}_t$, причем $P_{X_t}=Q_t,\ t\in T$. Это означает, что всегда можно построить семейство независимых случайных элементов, имеющих заданное распределение.
+    Пусть $(S_t,\mathcal{B}_t,Q_t)$ - семейство вероятностных пространств. Тогда на некотором вероятностном пространстве $(\Omega, \mathcal{F}, P)$ можно построить семейство независимых случайных элементов $X_t: \Omega\to S_t,\ X_t\in \mathcal{F}|\mathcal{B}_t$, причем $P_{X_t}=Q_t,\ t\in T$. Это означает, что всегда можно построить семейство независимых случайных элементов, имеющих заданное распределение.
 \end{theorem}
 \subsection{Расширенные случайные величины}
 \begin{definition}
@@ -807,7 +834,7 @@
         \item Если $X\leq Y$, то $EX\leq EY$.
     \end{enumerate}
 \end{theorem}
-\begin{proof}
+\begin{proof}\tab
     \begin{enumerate}
         \item Рассмотрим два случая
         \begin{enumerate}
@@ -839,13 +866,14 @@
         k2^{-n},\ \ k2^{-n}\leq X(\omega)<(k+1)2^{-n},\ k=0, 1, \dots, n2^n-1,\\
         n\ \ \ \ \ , \ \ X(\omega)\geq n.
     \end{cases}\]
-    Тогда $X_n$ не убывает и $X_n\to X$.
+    \[|X_n(\omega)-X(\omega)|\leq 2^{-n}\to 0\]
+    Тогда $X_n\to X$.
 \end{proof}
 \begin{lemma}
     Пусть $X\geq 0$ случайная величина. Тогда для любой последовательности простых функций $0\leq X_n\leq X,\ X_n\to X$ выполнено, что $EX_n\to EX$.
 \end{lemma}
 \begin{proof}
-    $X_n$ - простые и $X_{n}\leq X_{m+1} \Rightarrow EX_n \leq EX_{n+1}$. При этом
+    $X_n$ - простые и $X_{n}\leq X_{n+1} \Rightarrow EX_n \leq EX_{n+1}$. При этом
     \[EX=\sup\{EY: 0\leq Y\leq X,\ Y - \text{простая}\}\]
     значит существует предел 
     \[\lim\limits_{n\to\infty}EX_n=a\leq EX\]
@@ -855,16 +883,16 @@
         \ \ \ \ \ \ p_0,\ \ p_1\ \ ,\  \dots\ ,\ p_k
     \end{cases}\]
     Тогда
-    \[EY=\sum\limits_{j=1}^{j}b_j p_j\]
-    Введем $Y_n=(1-\epsilon)Y \cdot I\{(1-\epsilon)Y\leq X\},\ n\in \N,\ \epsilon\in (0,1)$. Из определения
+    \[EY=\sum\limits_{j=1}^{k}b_j p_j\]
+    Введем $Y_n=(1-\epsilon)Y \cdot I\{(1-\epsilon)Y\leq X_n\},\ n\in \N,\ \epsilon\in (0,1)$. Из определения
     $Y_n\leq X_n \Rightarrow EY_n\leq EX_n\leq a$. Пусть 
     \[B_j=\{\omega: Y(\omega)=b_j\},\ C_{jn}=\{(1-\epsilon)Y\leq X_n\}\]
-    Тогда $Y(\omega)=(1-\epsilon)b_j$, если $\omega\in B_j\cap C_{jn}$. Получаем, что
-    \[EY_n=\sum\limits_{j}(1-\epsilon)b_j P(C_{jn})\]\
+    Тогда $Y_n(\omega)=(1-\epsilon)b_j$, если $\omega\in B_j\cap C_{jn}$. Получаем, что
+    \[EY_n=\sum\limits_{j}(1-\epsilon)b_j P(B_j\cap C_{jn})\]\
     При этом, по свойству непрерывности вероятностной меры
-    \[P(C_{jn})\to P(B_j)\]
+    \[P(B_j\cap C_{jn})\to P(B_j)\]
     следовательно
-    \[EY_n=\sum\limits_{j}(1-\epsilon)b_j P(C_{jn})\to (1-\epsilon)\sum\limits_{j}b_j P(B_{j})=(1-\epsilon)EY\]
+    \[EY_n=\sum\limits_{j}(1-\epsilon)b_j P(B_j\cap C_{jn})\to (1-\epsilon)\sum\limits_{j}b_j P(B_{j})=(1-\epsilon)EY\]
     Получили, что $\forall \epsilon\in (0,1):$
     \[(1-\epsilon)EY\leq a\]
     тогда, устремив $\epsilon\to 0$, получим для любой $Y: EY\leq a \Rightarrow EX\leq a$. Из полученных неравентв, следует, что
