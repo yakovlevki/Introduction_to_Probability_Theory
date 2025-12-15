@@ -936,7 +936,18 @@
         \item $E$ - линейный функционал.
     \end{enumerate}
 \end{theorem}
+\subsection{Дополнение (материалы с семинара)}
+\begin{statement}
+    Если $X\sim B(n,p)$, то $EX=np$.
+\end{statement}
+\begin{statement}
+    Если $X\sim Pois(\lambda)$, то $EX=\lambda$
+\end{statement}
+\begin{statement}
+    Если $X$ и $Y$ независимые случайные величины, то $E(XY)=EX\cdot EY$
+\end{statement}
 \section{Лекция 7}
+\subsection{Теорема о монотонной сходимости}
 \begin{theorem} (Теорема о монотонной сходимости)\\
     Пусть $X_n\geq 0$ случайные величины и $X_n\nearrow X$. Тогда $EX_n\to EX$.
 \end{theorem}
@@ -961,7 +972,7 @@
     После предельного перехода при $k\to \infty$, получим
     \[0\leq X_n\leq Z\leq X\]
     После предельного перехода при $n\to \infty$, получим
-    \[0\leq Z_n\nearrow X \eqno{(2)}\]
+    \[0\leq Z_k \nearrow X \eqno{(2)}\]
     Так как $X_n\leq X$, то $EX_n\leq EX$, а значит
     \[\lim\limits_{n\to\infty} EX_n\leq EX\]
     Также из $(1)$ и $(2)$ имеем:
@@ -980,19 +991,19 @@
         1,\ x\in B,\\
         0,\ x\not\in B
     \end{cases}\]
-    \[\int\limits_{S}h(x)P_X(dx)=1\cdot P_X(B)=P(X\in B)\]
+    \[\int\limits_{S}h(x)P_X(dx)=1\cdot P_X(B)=P(X^{-1}(B))\]
     \[\int\limits_{\Omega}h(X(\omega))P(d\omega)=1\cdot P(X^{-1}(B))\]
     Тогда формула будет верна для линейной комбинации индикаторов, а значит для простых $h\geq 0$. По теореме о монотонной сходимости, формула будет верна для произвольной
     \[h=h^+-h^-\]
 \end{proof}
 \begin{comm}
-    Пусть
+    Пусть дискретная случайная величина
     \[X=\begin{cases}
         x_1,\ x_2, \dots\\
         p_1,\ p_2, \dots
     \end{cases}\]
-    \[Eh(x)=\sum\limits_{h(x_n)\geq 0}h(x_n)P(X=x_n)+\sum\limits_{h(x_n)< 0}h(x_n)P(X=x_n)\]
-    То есть конечное $Eh(x)$ существует, если 
+    \[Eh(X)=\sum\limits_{h(x_n)\geq 0}h(x_n)P(X=x_n)+\sum\limits_{h(x_n)< 0}h(x_n)P(X=x_n)\]
+    То есть конечное $Eh(X)$ существует, если 
     \[\sum\limits_{n} |h(x_n)|\cdot P(X=x_n)<\infty\]
 \end{comm}
 \subsection{Дисперсия случайной величины}
