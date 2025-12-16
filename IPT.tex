@@ -938,6 +938,9 @@
 \end{theorem}
 \subsection{Дополнение (материалы с семинара)}
 \begin{statement}
+    Если $X$ - Бернуллиевская случайная величина, то $EX=p$.
+\end{statement}
+\begin{statement}
     Если $X\sim B(n,p)$, то $EX=np$.
 \end{statement}
 \begin{statement}
@@ -1077,7 +1080,7 @@
     \[P(X=1)=p,\ \ P(X=0)=1-p\]
 \end{definition}
 \begin{theorem} (Теорема Бернулли)\\
-    Пусть $X_1,X_2,\dots$ независимые случайные Бернуллиевские случайные величины, $S_n=X_1+\dots+X_n$. Тогда $\forall \epsilon>0$
+    Пусть $X_1,X_2,\dots$ независимые случайные Бернуллиевские случайные величины, $S_n=X_1+\dots+X_n$ и $\var{X_k}\leq C$. Тогда $\forall \epsilon>0$
     \[P\left(\ \left|\frac{S_n}{n}-p\right|\geq \epsilon\right)\to 0,\ n\to \infty\]
     Это означает, что $\frac{S_n}{n}$ при больших $n$ имеют как-бы неслучайный порядок поведения.
 \end{theorem}
@@ -1189,4 +1192,122 @@
 \begin{comm}
     Далее равенство случайных величин всегда подразумеваем как равенство почти наверное.
 \end{comm}
+\subsection{Разные виды сходимостей}
+\begin{definition} (Сходимость почти наверное)\\
+    $X_n\to X$ почти наверное, если 
+    \[P(\{\omega: X_n(\omega)\not\to X(\omega)\})=0\]
+\end{definition}
+\begin{definition} (Сходимость по вероятности)\\
+    \[X_n\overset{P}{\to} X\ \Leftrightarrow\ \forall \epsilon>0:\ P(\{\omega: |X_n(\omega)-X(\omega)|\geq \epsilon\})\to 0\]
+\end{definition}
+\begin{definition} (Сходимость в $L^p$)\\
+    \[X_n\overset{L^p}{\to} X\ \Leftrightarrow\ E|X_n-X|^p\to 0\]
+\end{definition}
+\begin{definition} (Сходимость по распределению)\\
+    \[X_n\overset{D}{\to} X\ \Leftrightarrow\ \forall f\in \mathcal{C}_b(\R,\R):\ Ef(X_n)\to Ef(X)\]
+\end{definition}
+\begin{theorem}
+    Справедливы следующие соотношения
+    \begin{enumerate}
+        \item Сходимость почти наверное $\Rightarrow$ cходимость по вероятности.
+        \item Сходимость по вероятности $\Rightarrow$ cходимость по распределению.
+        \item Сходимость в $L^p$ $\Rightarrow$ сходимость по вероятности.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\end{proof}
+\begin{lemma} (Лемма Слуцкого)\\
+    Пусть
+    \[X_n\overset{D}{\to}X,\ \ Y_n\overset{P}{\to}c\]
+    Тогда
+    \begin{enumerate}
+        \item \[X_n+Y_n\overset{D}{\to}X+c\]
+        \item \[X_n\cdot Y_n\overset{D}{\to} cX\]
+    \end{enumerate}
+\end{lemma}
+\section{Лекция 9}
+\subsection{Теорема Райхмана}
+\begin{theorem} (Теорема Райхмана)\\
+    Пусть $X_1,X_2\dots$ случайные величины такие, что при $i\neq j$:
+    $\cov{(X_i,X_j)}=0$ и $\forall i: \var{X_i}\leq C$ и $S_n=X_1+\dots+X_n$. Тогда
+    \[\frac{S_n-ES_n}{n}\to 0\ \ \ \text{почти наверное}\]
+\end{theorem}
+\begin{proof}
+    будет
+\end{proof}
+\subsection{Теорема Колмогорова}
+\begin{lemma}
+    Для любой случайной величины $X$ справедливо соотношение
+    \[\sum\limits_{n=1}^{\infty}P(|X|\geq n)\leq E|X|\leq \sum\limits_{n=1}^{\infty}P(|X|\geq n)+1\]
+\end{lemma}
+\begin{proof}
+    тут норм
+\end{proof}
+\begin{theorem} (Теорема Колмогорова)\\
+    Пусть $X_1,X_2$ независимые, одинаково распределенные случайные величины. Тогда
+    \[\frac{S_n}{n}\to c\in \R\ \ \text{почти наверное}\ \Leftrightarrow\ \exists\ EX_1=c\]
+\end{theorem}
+\begin{proof}
+    ну это жестко
+\end{proof}
+\section{Лекция 10}
+Большая часть лекции была потрачена на завершение доказательства теоремы Колмогорова.
+\subsection{Равномерная интегрируемость}
+\begin{definition}
+    Семейство $\{X_t,\ t\in T\}$ действительных случайных величин называется равномерно интегрируемым, если 
+    \[\lim\limits_{c\to\infty}\sup\limits_{t\in T}E(|X_t|\cdot I\{|X_t\geq c|\})=0\]
+\end{definition}
+\begin{statement}
+    Пусть $\forall t\in T: |X_t|\leq Y,\ EY<\infty$. Тогда $\{X_t,\ t\in T\}$ равномерно интегрируемо.
+\end{statement}
+\begin{theorem}
+    Семейство $\{X_t, t\in T\}$ равномерно интегрируемо тогда и только тогда, когда
+    \begin{enumerate}
+        \item $\sup\limits_{t\in T}E|X_t|<\infty$.
+        \item $\forall \epsilon>0\ \exists\ \delta>0: P(A)\leq \delta \Rightarrow E(|X|\cdot I_A)<\epsilon$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    будет.
+\end{proof}
+\begin{theorem} (Теорема Де ла Валле-Пуссена)\\
+    Семейство $\{X_t, t\in T\}$ равномерно интегрируемо $\Leftrightarrow$ существует выпуклая функция $G: R_+\to \R_+$ такая, что
+    \begin{enumerate}
+        \item \[\frac{G(x)}{x}\to \infty,\ x\to \infty\]
+        \item \[\sup\limits_{t\in T}EG(|X_t|)<\infty\]
+    \end{enumerate}
+\end{theorem}
+\section{Лекция 11}
+\subsection{Разное}
+\begin{theorem}
+    Пусть $X_n, X\in L^p$ для некорого $p\geq 1$ и $X_n\to X,\ n\to \infty$. Тогда следующие утверждения эквивалентны:
+    \begin{enumerate}
+        \item $\{X_t, t\in T\}$ равномерно интегрируемо.
+        \item $X_n\overset{L^p}{\to}X,\ n\to \infty$.
+        \item $\|X_n\|_p\to \|X\|,\ n\to \infty$.
+    \end{enumerate}
+\end{theorem}
+\begin{lemma} (Лемма Фату)\\
+    Пусть $X_n\geq Y,\ EY>-\infty$. Тогда
+    \[E(\lim\limits_{k}\inf|X_k|^p) \leq \lim\limits_{k}\inf E(|X_k|^p)\]
+\end{lemma}
+\begin{theorem} (Теорема Хартмана-Винтера, Закон повторного логарифма)\\
+    Пусть $X_1, X_2$ независимые одинаково распределенные случайные величины, $EX_1=0,\ EX_1^2=1$. Тогда с вероятностью 1 произойдут события:
+    \begin{enumerate}
+        \item \[\lim\limits_{n\to\infty}\sup \frac{S_n}{\sqrt{2n\ln\ln(n)}}=1\]
+        \item \[\lim\limits_{n\to\infty}\inf \frac{S_n}{\sqrt{2n\ln\ln(n)}}=-1\]
+    \end{enumerate}
+\end{theorem}
+\begin{theorem} (Теорема Леви, Центральная предельная теорема)\\
+    Пусть $X_1, X_2$ независимые одинаково распределенные случайные величины, $EX_1=a,\ \var{X_1}=\sigma^2>0$. Тогда
+    \[\frac{S_n-na}{\sigma\sqrt{n}}\overset{D}{\to}Z\sim N(0,1)\]
+\end{theorem}
+\begin{theorem} (Теорема Радона-Никодима)\\
+    Пусть $Q$ и $P$ --- $\sigma$-конечные меры на $(S,\mathcal{B})$. Тогда
+    \[Q<<P \Leftrightarrow Q(B)=\int\limits_{S}f(x)P(dx)\]
+    где $f$ - интегрируема по мере $P$.
+\end{theorem}
 \end{document}
